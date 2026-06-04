@@ -1,0 +1,21 @@
+17:22:52 - Starting servent [4|localhost|1300|4000|10000]
+17:22:52 - Starting listener
+17:22:52 - Starting cli
+17:22:52 - Starting initializer
+17:22:52 - Initializer started
+17:22:52 - Initializer entered run
+17:22:52 - Connecting to bootstrap 2000
+17:22:52 - Connected to bootstrap
+17:22:52 - Sending Hail
+17:22:52 - Waiting for response
+17:22:52 - Bootstrap returned port: 1200
+17:22:53 - Sending message [4|1300|0||NEW_NODE|1200|48]
+17:22:54 - Got message [28|1100|2||WELCOME|1300|4]
+17:22:55 - Sending message [4|1300|1||UPDATE|1100|28]
+17:22:57 - Got message [4|1300|3|1100,1200|UPDATE|1300|4]
+17:23:07 - Got message [24|1400|5|1100,1200|UPDATE|1300|4]
+17:23:09 - Sending message [24|1400|2|1100,1200,1300|UPDATE|1400|24]
+17:23:14 - Got message [0|1600|6||NEW_NODE|1300|4]
+17:23:15 - Sending message [4|1300|3||WELCOME|1600|0]
+17:23:16 - Got message [0|1600|1||UPDATE|1300|4]
+17:23:17 - Sending message [0|1600|4|1300|UPDATE|1400|24]

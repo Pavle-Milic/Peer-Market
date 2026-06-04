@@ -1,0 +1,37 @@
+17:22:42 - Starting servent [48|localhost|1200|4000|10000]
+17:22:42 - Starting listener
+17:22:42 - Starting cli
+17:22:42 - Starting initializer
+17:22:42 - Initializer started
+17:22:42 - Initializer entered run
+17:22:42 - Connecting to bootstrap 2000
+17:22:42 - CLI read: pause 40000
+17:22:42 - Pausing for 40000 ms
+17:22:42 - Connected to bootstrap
+17:22:42 - Sending Hail
+17:22:42 - Waiting for response
+17:22:42 - Bootstrap returned port: 1100
+17:22:43 - Sending message [48|1200|0||NEW_NODE|1100|28]
+17:22:44 - Got message [28|1100|0||WELCOME|1200|48]
+17:22:45 - Sending message [48|1200|1||UPDATE|1100|28]
+17:22:46 - Got message [48|1200|1|1100|UPDATE|1200|48]
+17:22:53 - Got message [4|1300|0||NEW_NODE|1200|48]
+17:22:53 - Sending message [4|1300|2||NEW_NODE|1100|28]
+17:22:56 - Got message [4|1300|3|1100|UPDATE|1200|48]
+17:22:57 - Sending message [4|1300|3|1100,1200|UPDATE|1300|4]
+17:23:03 - Got message [24|1400|0||SUBSCRIBE|1200|48]
+17:23:04 - Sending message [48|1200|4|Sucessfully Subscribed to the node on port1200|NOTIFYSUBSCRIBERS|1400|24]
+17:23:06 - Got message [24|1400|5|1100|UPDATE|1200|48]
+17:23:07 - Sending message [24|1400|5|1100,1200|UPDATE|1300|4]
+17:23:14 - Got message [0|1600|6||NEW_NODE|1200|48]
+17:23:14 - Sending message [0|1600|6||NEW_NODE|1300|4]
+17:23:18 - Got message [0|1600|7|1300,1400,1100|UPDATE|1200|48]
+17:23:19 - Sending message [0|1600|7|1300,1400,1100,1200|UPDATE|1600|0]
+17:23:22 - CLI read: list_item auto 20
+17:23:23 - Sending message [48|1200|8|51:20:1200|PUT|1600|0]
+17:23:23 - Sending message [48|1200|9|1200 list 20 auto|NOTIFYSUBSCRIBERS|1400|24]
+17:23:44 - Got message [28|1100|8|0:5:1400|PUT|1200|48]
+17:23:44 - Sending message [48|1200|10|0:5:1400|PUT|1600|0]
+17:24:13 - Got message [28|1100|9|51:10:1100|BUY|1200|48]
+17:24:14 - Sending message [48|1200|11|51:10:1100|BUY|1600|0]
+17:24:15 - Got message [0|1600|2|servant on port 1100 bought 10 things with the key 51|INFO|1200|48]

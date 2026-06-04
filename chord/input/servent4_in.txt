@@ -1,0 +1,3 @@
+pause 80000
+search auto
+search patike

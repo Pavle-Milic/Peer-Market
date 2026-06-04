@@ -1,0 +1,6 @@
+17:23:04 - Couldn't handle message: [48|1200|4|Sucessfully Subscribed to the node on port1200|NOTIFYSUBSCRIBERS|1400|24]
+17:23:23 - Couldn't handle message: [48|1200|9|1200 list 20 auto|NOTIFYSUBSCRIBERS|1400|24]
+Exception in thread "Thread-1" java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
+	at cli.CLIParser.run(CLIParser.java:56)
+	at java.base/java.lang.Thread.run(Thread.java:831)

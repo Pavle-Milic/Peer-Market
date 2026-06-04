@@ -1,0 +1,3 @@
+subscribe 1200
+pause 40000
+list_item patike 5

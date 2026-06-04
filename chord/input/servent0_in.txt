@@ -1,0 +1,2 @@
+pause 100000
+buy auto 10

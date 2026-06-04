@@ -1,0 +1,26 @@
+17:23:12 - Starting servent [0|localhost|1600|4000|10000]
+17:23:12 - Starting listener
+17:23:12 - Starting cli
+17:23:12 - Starting initializer
+17:23:12 - Initializer started
+17:23:12 - Initializer entered run
+17:23:12 - Connecting to bootstrap 2000
+17:23:12 - CLI read: pause 80000
+17:23:12 - Pausing for 80000 ms
+17:23:12 - Connected to bootstrap
+17:23:12 - Sending Hail
+17:23:12 - Waiting for response
+17:23:12 - Bootstrap returned port: 1100
+17:23:13 - Sending message [0|1600|0||NEW_NODE|1100|28]
+17:23:15 - Got message [4|1300|3||WELCOME|1600|0]
+17:23:16 - Sending message [0|1600|1||UPDATE|1300|4]
+17:23:19 - Got message [0|1600|7|1300,1400,1100,1200|UPDATE|1600|0]
+17:23:23 - Got message [48|1200|8|51:20:1200|PUT|1600|0]
+17:23:44 - Got message [48|1200|10|0:5:1400|PUT|1600|0]
+17:24:14 - Got message [48|1200|11|51:10:1100|BUY|1600|0]
+17:24:15 - Sending message [0|1600|2|servant on port 1100 bought 10 things with the key 51|INFO|1200|48]
+17:24:15 - Sending message [0|1600|3|Buy sucessful|INFO|1100|28]
+17:24:32 - CLI read: search auto
+17:24:32 - 51: Pair[port=1200, stanje=10]
+17:24:32 - CLI read: search patike
+17:24:32 - 0: Pair[port=1400, stanje=5]

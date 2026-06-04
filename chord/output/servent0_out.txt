@@ -1,0 +1,35 @@
+17:22:32 - Starting servent [28|localhost|1100|4000|10000]
+17:22:32 - Starting listener
+17:22:32 - Starting cli
+17:22:32 - Starting initializer
+17:22:32 - Initializer started
+17:22:32 - Initializer entered run
+17:22:32 - Connecting to bootstrap 2000
+17:22:32 - CLI read: pause 100000
+17:22:32 - Pausing for 100000 ms
+17:22:32 - Connected to bootstrap
+17:22:32 - Sending Hail
+17:22:32 - Waiting for response
+17:22:32 - Bootstrap returned port: -1
+17:22:32 - First node in Chord system.
+17:22:43 - Got message [48|1200|0||NEW_NODE|1100|28]
+17:22:44 - Sending message [28|1100|0||WELCOME|1200|48]
+17:22:45 - Got message [48|1200|1||UPDATE|1100|28]
+17:22:46 - Sending message [48|1200|1|1100|UPDATE|1200|48]
+17:22:53 - Got message [4|1300|2||NEW_NODE|1100|28]
+17:22:54 - Sending message [28|1100|2||WELCOME|1300|4]
+17:22:55 - Got message [4|1300|1||UPDATE|1100|28]
+17:22:56 - Sending message [4|1300|3|1100|UPDATE|1200|48]
+17:23:03 - Got message [24|1400|1||NEW_NODE|1100|28]
+17:23:04 - Sending message [28|1100|4||WELCOME|1400|24]
+17:23:05 - Got message [24|1400|2||UPDATE|1100|28]
+17:23:06 - Sending message [24|1400|5|1100|UPDATE|1200|48]
+17:23:13 - Got message [0|1600|0||NEW_NODE|1100|28]
+17:23:14 - Sending message [0|1600|6||NEW_NODE|1200|48]
+17:23:18 - Got message [0|1600|3|1300,1400|UPDATE|1100|28]
+17:23:18 - Sending message [0|1600|7|1300,1400,1100|UPDATE|1200|48]
+17:23:43 - Got message [24|1400|4|0:5:1400|PUT|1100|28]
+17:23:44 - Sending message [28|1100|8|0:5:1400|PUT|1200|48]
+17:24:12 - CLI read: buy auto 10
+17:24:13 - Sending message [28|1100|9|51:10:1100|BUY|1200|48]
+17:24:15 - Got message [0|1600|3|Buy sucessful|INFO|1100|28]

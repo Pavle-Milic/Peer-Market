@@ -1,0 +1,25 @@
+17:23:02 - Starting servent [24|localhost|1400|4000|10000]
+17:23:02 - Starting listener
+17:23:02 - Starting cli
+17:23:02 - Starting initializer
+17:23:02 - Initializer started
+17:23:02 - Initializer entered run
+17:23:02 - Connecting to bootstrap 2000
+17:23:02 - CLI read: subscribe 1200
+17:23:02 - CLI read: pause 40000
+17:23:02 - Connected to bootstrap
+17:23:02 - Pausing for 40000 ms
+17:23:02 - Sending Hail
+17:23:02 - Waiting for response
+17:23:02 - Bootstrap returned port: 1100
+17:23:03 - Sending message [24|1400|0||SUBSCRIBE|1200|48]
+17:23:03 - Sending message [24|1400|1||NEW_NODE|1100|28]
+17:23:04 - Got message [48|1200|4|Sucessfully Subscribed to the node on port1200|NOTIFYSUBSCRIBERS|1400|24]
+17:23:04 - Got message [28|1100|4||WELCOME|1400|24]
+17:23:05 - Sending message [24|1400|2||UPDATE|1100|28]
+17:23:09 - Got message [24|1400|2|1100,1200,1300|UPDATE|1400|24]
+17:23:17 - Got message [0|1600|4|1300|UPDATE|1400|24]
+17:23:18 - Sending message [0|1600|3|1300,1400|UPDATE|1100|28]
+17:23:23 - Got message [48|1200|9|1200 list 20 auto|NOTIFYSUBSCRIBERS|1400|24]
+17:23:42 - CLI read: list_item patike 5
+17:23:43 - Sending message [24|1400|4|0:5:1400|PUT|1100|28]

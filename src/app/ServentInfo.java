@@ -41,6 +41,14 @@ public class ServentInfo implements Serializable {
 	public void setHigh(int high) {
 		this.high=high;
 	}
+
+	public int getLow(){
+		return low;
+	}
+
+	public int getHigh(){
+		return high;
+	}
 	
 	@Override
 	public String toString() {

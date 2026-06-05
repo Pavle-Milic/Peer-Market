@@ -1,2 +1,6 @@
 pause 100000
 buy auto 10
+pause 10000
+info
+print_values
+pause 10000

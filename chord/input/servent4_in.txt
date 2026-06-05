@@ -1,3 +1,7 @@
 pause 80000
 search auto
 search patike
+pause 10000
+info
+print_values
+pause 10000

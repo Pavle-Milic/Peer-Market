@@ -47,13 +47,22 @@ public class ServentMain {
 		
 		AppConfig.timestampedStandardPrint("Starting servent " + AppConfig.myServentInfo);
 
+		SimpleServentListener simpleListener=null;
+		Pinger pinger=null;
+		CLIParser cliParser=null;
+
 		AppConfig.timestampedStandardPrint("Starting listener");
-		SimpleServentListener simpleListener = new SimpleServentListener();
+		simpleListener = new SimpleServentListener(pinger,cliParser);
 		Thread listenerThread = new Thread(simpleListener);
 		listenerThread.start();
 
+		AppConfig.timestampedStandardPrint("Starting pinger");
+		pinger = new Pinger();
+		Thread pingerThread = new Thread(pinger);
+		pingerThread.start();
+
 		AppConfig.timestampedStandardPrint("Starting cli");
-		CLIParser cliParser = new CLIParser(simpleListener);
+		cliParser = new CLIParser(simpleListener, pinger);
 		Thread cliThread = new Thread(cliParser);
 		cliThread.start();
 

@@ -1,4 +1,8 @@
-Exception in thread "Thread-1" java.util.NoSuchElementException: No line found
+Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
 	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
-	at cli.CLIParser.run(CLIParser.java:56)
+	at cli.CLIParser.run(CLIParser.java:58)
 	at java.base/java.lang.Thread.run(Thread.java:831)
+05:53:16 - Couldn't send message: [0|1600|2917||PING|1700|20]
+05:53:18 - Couldn't send message: [0|1600|2930||PING|1700|20]
+05:53:18 - Couldn't send message: [0|1600|2939||PING|1700|20]
+05:53:24 - Couldn't send message: [0|1600|3001||ASKPONG|1700|20]

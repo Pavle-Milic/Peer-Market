@@ -29,7 +29,7 @@ public class AskGetHandler implements MessageHandler {
 					int value = -1;
 					
 					if (valueMap.containsKey(key)) {
-						value = valueMap.get(key).stanje();
+						value = valueMap.get(key).value();
 					}
 					
 					TellGetMessage tgm = new TellGetMessage(AppConfig.myServentInfo.getListenerPort(), clientMessage.getSenderPort(),

@@ -17,7 +17,7 @@ public class SearchCommand implements CLICommand{
 
         if (splitArgs.length == 1) {
             String name = splitArgs[0];
-            int key = Math.abs(ChordState.chordHash(name.hashCode()));
+            int key = ChordState.chordHash(Math.abs(name.hashCode()));
             ChordState.Pair val = AppConfig.chordState.getValue(key);
 
             if (Objects.equals(val, new ChordState.Pair(-2, -2))) {

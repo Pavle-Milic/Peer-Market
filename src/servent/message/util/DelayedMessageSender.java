@@ -6,6 +6,7 @@ import java.net.Socket;
 
 import app.AppConfig;
 import servent.message.Message;
+import servent.message.MessageType;
 
 /**
  * This worker sends a message asynchronously. Doing this in a separate thread
@@ -34,7 +35,9 @@ public class DelayedMessageSender implements Runnable {
 		}
 		
 		if (MessageUtil.MESSAGE_UTIL_PRINTING) {
-			AppConfig.timestampedStandardPrint("Sending message " + messageToSend);
+			if(messageToSend.getMessageType()!= MessageType.PING && messageToSend.getMessageType()!= MessageType.PONG) {
+				AppConfig.timestampedStandardPrint("Sending message " + messageToSend);
+			}
 		}
 		
 		try {

@@ -1,0 +1,48 @@
+05:49:54 - Starting servent [20|localhost|1700|3000|7000]
+05:49:54 - Starting listener
+05:49:54 - Starting pinger
+05:49:54 - Starting cli
+05:49:54 - Starting initializer
+05:49:54 - Initializer started
+05:49:54 - Initializer entered run
+05:49:54 - Connecting to bootstrap 2000
+05:49:54 - Pausing for 200000 ms
+05:49:54 - Connected to bootstrap
+05:49:54 - Sending Hail
+05:49:54 - Waiting for response
+05:49:54 - Bootstrap returned port: 1300
+05:49:56 - Sending message [20|1700|0||NEW_NODE|1300|4]
+05:49:58 - Got message [24|1400|178||WELCOME|1700|20]
+05:49:59 - Sending message [20|1700|1||UPDATE|1400|24]
+05:50:04 - Got message [20|1700|343|1400,1100,1200,1600,1300|UPDATE|1700|20]
+05:50:09 - Sending message [20|1700|41||ASKPING|1300|4]
+05:50:15 - Sending message [20|1700|121||ASKPING|1200|48]
+05:50:22 - Sending message [20|1700|220||ASKPING|1600|0]
+05:50:29 - Sending message [20|1700|311||ASKPING|1300|4]
+05:50:35 - Sending message [20|1700|407||ASKPING|1300|4]
+05:50:42 - Sending message [20|1700|506||ASKPING|1400|24]
+05:50:48 - Sending message [20|1700|604||ASKPING|1600|0]
+05:50:54 - Sending message [20|1700|686||ASKPING|1400|24]
+05:51:00 - Sending message [20|1700|767||ASKPING|1300|4]
+05:51:05 - Sending message [20|1700|850||ASKPING|1200|48]
+05:51:12 - Sending message [20|1700|932||ASKPING|1200|48]
+05:51:18 - Sending message [20|1700|1025||ASKPING|1200|48]
+05:51:25 - Sending message [20|1700|1119||ASKPING|1200|48]
+05:51:31 - Sending message [20|1700|1219||ASKPING|1300|4]
+05:51:38 - Sending message [20|1700|1306||ASKPING|1300|4]
+05:51:45 - Sending message [20|1700|1413||ASKPING|1600|0]
+05:51:51 - Sending message [20|1700|1504||ASKPING|1200|48]
+05:51:57 - Sending message [20|1700|1593||ASKPING|1600|0]
+05:52:02 - Sending message [20|1700|1671||ASKPING|1300|4]
+05:52:09 - Sending message [20|1700|1767||ASKPING|1300|4]
+05:52:15 - Sending message [20|1700|1869||ASKPING|1200|48]
+05:52:21 - Sending message [20|1700|1947||ASKPING|1200|48]
+05:52:28 - Sending message [20|1700|2050||ASKPING|1600|0]
+05:52:34 - Sending message [20|1700|2137||ASKPING|1300|4]
+05:52:40 - Sending message [20|1700|2233||ASKPING|1600|0]
+05:52:46 - Sending message [20|1700|2317||ASKPING|1200|48]
+05:52:52 - Sending message [20|1700|2405||ASKPING|1600|0]
+05:52:58 - Sending message [20|1700|2508||ASKPING|1200|48]
+05:53:05 - Sending message [20|1700|2599||ASKPING|1400|24]
+05:53:11 - Sending message [20|1700|2703||ASKPING|1400|24]
+05:53:14 - Stopping...

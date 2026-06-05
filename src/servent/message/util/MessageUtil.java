@@ -6,6 +6,7 @@ import java.net.Socket;
 
 import app.AppConfig;
 import servent.message.Message;
+import servent.message.MessageType;
 
 /**
  * For now, just the read and send implementation, based on Java serializing.
@@ -29,12 +30,12 @@ public class MessageUtil {
 	public static Message readMessage(Socket socket) {
 		
 		Message clientMessage = null;
-			
+
 		try {
 			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-	
+
 			clientMessage = (Message) ois.readObject();
-			
+
 			socket.close();
 		} catch (IOException e) {
 			AppConfig.timestampedErrorPrint("Error in reading socket on " +
@@ -42,11 +43,13 @@ public class MessageUtil {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		if (MESSAGE_UTIL_PRINTING) {
-			AppConfig.timestampedStandardPrint("Got message " + clientMessage);
+            if(clientMessage.getMessageType()!= MessageType.PING && clientMessage.getMessageType()!= MessageType.PONG) {
+				AppConfig.timestampedStandardPrint("Got message " + clientMessage);
+			}
 		}
-				
+
 		return clientMessage;
 	}
 	

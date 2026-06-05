@@ -1,3 +1,7 @@
 subscribe 1200
 pause 40000
 list_item patike 5
+pause 10000
+info
+print_values
+pause 10000

@@ -1,5 +1,12 @@
-Exception in thread "Thread-1" java.util.NoSuchElementException: No line found
+Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
 	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
-	at cli.CLIParser.run(CLIParser.java:56)
+	at cli.CLIParser.run(CLIParser.java:58)
 	at java.base/java.lang.Thread.run(Thread.java:831)
-17:24:15 - Couldn't handle message: [0|1600|2|servant on port 1100 bought 10 things with the key 51|INFO|1200|48]
+05:50:48 - Couldn't handle message: [0|1600|733|servant on port 1100 bought 10 things with the key 51|INFO|1200|48]
+05:53:16 - Couldn't send message: [48|1200|3837||PING|1700|20]
+05:53:17 - Couldn't send message: [48|1200|3844||PING|1700|20]
+05:53:17 - Couldn't send message: [48|1200|3855||PING|1700|20]
+05:53:18 - Couldn't send message: [48|1200|3870||PING|1700|20]
+05:53:22 - Couldn't send message: [48|1200|3925||ASKPONG|1700|20]
+05:53:22 - Couldn't send message: [48|1200|3934||ASKPONG|1700|20]
+05:53:23 - Couldn't send message: [48|1200|3942||ASKPONG|1700|20]

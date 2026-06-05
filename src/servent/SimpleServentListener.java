@@ -9,16 +9,22 @@ import java.util.concurrent.Executors;
 
 import app.AppConfig;
 import app.Cancellable;
+import app.Pinger;
+import cli.CLIParser;
 import servent.handler.*;
-import servent.message.Message;
+import servent.message.*;
 import servent.message.util.MessageUtil;
 
 public class SimpleServentListener implements Runnable, Cancellable {
 
 	private volatile boolean working = true;
+
+	private Pinger pinger;
+	private CLIParser cliParser;
 	
-	public SimpleServentListener() {
-		
+	public SimpleServentListener( Pinger pinger,CLIParser cliParser) {
+		this.pinger = pinger;
+		this.cliParser = cliParser;
 	}
 
 	/*
@@ -84,6 +90,29 @@ public class SimpleServentListener implements Runnable, Cancellable {
 						break;
 					case BUY:
 						messageHandler = new BuyHandler(clientMessage);
+						break;
+					case BACKUPKEY:
+						messageHandler = new BackupKeyHandler(clientMessage);
+						break;
+					case PING:
+						messageHandler = new PingHandler(clientMessage);
+						break;
+					case ASKPING:
+						messageHandler = new AskPingHandler((AskPingMessage) clientMessage);
+						break;
+					case PONG:
+						messageHandler = new PongHandler(clientMessage);
+						break;
+					case ASKPONG:
+						messageHandler = new AskPongHandler((AskPongMessage) clientMessage);
+						break;
+					case DEADNODE:
+						messageHandler = new DeadNodeHandler((DeadNodeMessage) clientMessage,pinger,cliParser,this);
+						break;
+					case INFO:
+						break;
+					case NOTIFYSUBSCRIBERS:
+						break;
 				case POISON:
 					break;
 				}

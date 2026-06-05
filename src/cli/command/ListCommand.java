@@ -23,7 +23,7 @@ public class ListCommand implements CLICommand{
         if (splitArgs.length == 2) {
             String name = splitArgs[0];
             int count = Integer.parseInt(splitArgs[1]);
-            int key = Math.abs(ChordState.chordHash(name.hashCode()));
+            int key = ChordState.chordHash(Math.abs(name.hashCode()));
             try {
                 if (key < 0 || key >= ChordState.CHORD_SIZE) {
                     throw new NumberFormatException();

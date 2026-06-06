@@ -1,18 +1,13 @@
 package servent.handler;
 
 import app.AppConfig;
-import app.ChordState;
 import app.Pinger;
-import app.ServentInfo;
 import cli.CLIParser;
+import mutex.GrindingRoom;
 import servent.SimpleServentListener;
 import servent.message.DeadNodeMessage;
-import servent.message.Message;
 import servent.message.MessageType;
-import servent.message.util.MessageUtil;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class DeadNodeHandler implements MessageHandler {
 
@@ -39,10 +34,11 @@ public class DeadNodeHandler implements MessageHandler {
         int deadNodeId = clientMessage.getPortId();
         int messageId       = clientMessage.getMessageId();
 
-        if (AppConfig.chordState.isKeyMine(deadNodeId)) {
+        if (deadNodeId == AppConfig.myServentInfo.getChordId()) {
             pinger.stop();
             cliParser.stop();
             sl.stop();
+            GrindingRoom.finallyTimeForLeagueOfLegends();
             return;
         }
 
@@ -53,7 +49,7 @@ public class DeadNodeHandler implements MessageHandler {
         Pinger.removeNode(deadNodeId);
 
         AppConfig.chordState.addSeenDeadNodeMessage(deadNodeId, messageId);
-        AppConfig.chordState.notifyNeighbors(deadNodeId, messageId);
+        AppConfig.chordState.notifyNeighbors(deadNodeId, messageId, MessageType.DEADNODE);
         AppConfig.chordState.removeDeadNode(deadNodeId);
     }
 }

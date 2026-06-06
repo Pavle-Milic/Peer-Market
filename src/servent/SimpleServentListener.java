@@ -118,6 +118,12 @@ public class SimpleServentListener implements Runnable, Cancellable {
 					case CONFIRMPUT:
 						messageHandler = new ConfirmPutHandler(clientMessage);
 						break;
+					case TOKEN:
+						messageHandler = new TokenHandler((TokenMessage) clientMessage);
+						break;
+					case TOKENREQUEST:
+						messageHandler = new TokenRequestHandler((TokenRequestMessage) clientMessage);
+						break;
 				case POISON:
 					break;
 				}

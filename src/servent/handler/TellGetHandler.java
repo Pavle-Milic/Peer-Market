@@ -29,7 +29,7 @@ public class TellGetHandler implements MessageHandler {
 						if (value == -1) {
 							AppConfig.timestampedStandardPrint("No such key: " + key);
 						} else {
-							AppConfig.timestampedStandardPrint("Search je nasao stanje "+ value+ " na id-u " + key);
+							AppConfig.timestampedStandardPrint("Search je nasao stanje "+ value+ " na kljucu " + key);
 						}
 					}
 					else{

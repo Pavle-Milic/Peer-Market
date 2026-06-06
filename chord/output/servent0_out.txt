@@ -1,34 +1,60 @@
-04:42:13 - Starting servent [8|localhost|1000|4000|10000]
-04:42:13 - Starting listener
-04:42:13 - Starting pinger
-04:42:13 - Starting cli
-04:42:13 - Starting initializer
-04:42:13 - Initializer started
-04:42:13 - Initializer entered run
-04:42:13 - Connecting to bootstrap 2000
-04:42:13 - Pausing for 100000 ms
-04:42:13 - Connected to bootstrap
-04:42:13 - Sending Hail
-04:42:13 - Waiting for response
-04:42:13 - Bootstrap returned port: -1
-04:42:13 - First node in Chord system.
-04:42:24 - Got message [28|1100|0||NEW_NODE|1000|8]
-04:42:24 - Sending message [8|1000|0||WELCOME|1100|28]
-04:42:25 - Got message [28|1100|1||UPDATE|1000|8]
-04:42:27 - Sending message [28|1100|1|1000|UPDATE|1100|28]
-04:42:34 - Got message [48|1200|0||NEW_NODE|1000|8]
-04:42:34 - Sending message [8|1000|4||WELCOME|1200|48]
-04:42:35 - Got message [48|1200|1||UPDATE|1000|8]
-04:42:36 - Sending message [48|1200|5|1000|UPDATE|1100|28]
-04:42:44 - Got message [4|1300|1||NEW_NODE|1000|8]
-04:42:45 - Sending message [8|1000|10||WELCOME|1300|4]
-04:42:46 - Got message [4|1300|4||UPDATE|1000|8]
-04:42:48 - Sending message [4|1300|12|1000|UPDATE|1100|28]
-04:42:59 - Got message [24|1400|15|1100,1200,1300|UPDATE|1000|8]
-04:42:59 - Sending message [24|1400|24|1100,1200,1300,1000|UPDATE|1400|24]
-04:43:03 - Got message [44|1500|0||NEW_NODE|1000|8]
-04:43:05 - Sending message [44|1500|29||NEW_NODE|1400|24]
-04:43:06 - Got message [4|1300|23|51:20:28|BACKUPKEY|1000|8]
-04:43:12 - Got message [44|1500|31|1200,1300|UPDATE|1000|8]
-04:43:13 - Sending message [44|1500|42|1200,1300,1000|UPDATE|1400|24]
-04:43:24 - Got message [4|1300|49|0:5:4|BACKUPKEY|1000|8]
+17:58:54 - Starting servent [8|localhost|1000|4000|10000]
+17:58:54 - Starting listener
+17:58:55 - Starting pinger
+17:58:55 - Starting cli
+17:58:55 - Starting initializer
+17:58:55 - Initializer started
+17:58:55 - Initializer entered run
+17:58:55 - Connecting to bootstrap 2000
+17:58:55 - KEY ACKQIERD ===========================================================
+17:58:55 - Pausing for 10000 ms
+17:58:55 - Connected to bootstrap
+17:58:55 - Sending Hail
+17:58:55 - Waiting for response
+17:58:55 - Bootstrap returned port: -1
+17:58:55 - First node in Chord system.
+17:58:55 - Got message [28|1100|0||NEW_NODE|1000|8]
+17:58:55 - Got message [4|1300|0||NEW_NODE|1000|8]
+17:58:55 - Got message [48|1200|0||NEW_NODE|1000|8]
+17:58:55 - Sending message [8|1000|1||WELCOME|1300|4]
+17:58:55 - Sending message [8|1000|0||WELCOME|1100|28]
+17:58:55 - Got message [44|1500|0||NEW_NODE|1000|8]
+17:58:55 - Got message [24|1400|0||NEW_NODE|1000|8]
+17:58:55 - Got message [4|1300|1||UPDATE|1000|8]
+17:58:55 - Got message [28|1100|1||UPDATE|1000|8]
+17:58:55 - Sending message [4|1300|2|1000|UPDATE|1100|28]
+17:59:05 - Radim ==============================================================
+17:59:05 - Obavljam buy Job ===================================================
+17:59:05 - Obavljam buy Job ===================================================
+17:59:05 - My info: [8|localhost|1000|4000|10000]
+17:59:05 - Sending message [8|1000|11|51:10:8|BUY|1100|28]
+17:59:05 - Value map je prazna.
+17:59:05 - Sending message [8|1000|10|51:10:8|BUY|1100|28]
+17:59:05 - Pausing for 10000 ms
+17:59:05 - Got message [4|1300|10||TOKENREQUEST|1000|8]
+17:59:05 - Got message [4|1300|8||TOKENREQUEST|1000|8]
+17:59:05 - Sending message [8|1000|12||TOKENREQUEST|1100|28]
+17:59:05 - Sending message [8|1000|13||TOKENREQUEST|1100|28]
+17:59:05 - Sending message [8|1000|15||TOKENREQUEST|1300|4]
+17:59:05 - Sending message [8|1000|14||TOKENREQUEST|1300|4]
+17:59:05 - Sending message [8|1000|16||TOKEN|1100|28]
+17:59:05 - Got message [4|1300|13||TOKENREQUEST|1000|8]
+17:59:05 - Got message [4|1300|12||TOKENREQUEST|1000|8]
+17:59:05 - Sending message [8|1000|18||TOKENREQUEST|1300|4]
+17:59:05 - Sending message [8|1000|17||TOKENREQUEST|1100|28]
+17:59:05 - Sending message [8|1000|19||TOKENREQUEST|1100|28]
+17:59:05 - Got message [4|1300|14||TOKENREQUEST|1000|8]
+17:59:05 - Sending message [8|1000|20||TOKENREQUEST|1300|4]
+17:59:05 - Sending message [8|1000|21||TOKENREQUEST|1100|28]
+17:59:05 - Sending message [8|1000|22||TOKENREQUEST|1300|4]
+17:59:05 - Got message [4|1300|19|Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem|INFO|1000|8]
+17:59:05 - Got message [4|1300|20|Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem|INFO|1000|8]
+17:59:05 - Sending message [8|1000|23|Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem|INFO|1100|28]
+17:59:05 - Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem
+17:59:05 - Got message [4|1300|21|Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem|INFO|1000|8]
+17:59:05 - Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem
+17:59:05 - Got message [4|1300|22||TOKEN|1000|8]
+17:59:05 - Sending message [8|1000|24||TOKEN|1100|28]
+18:05:30 - Got message [4|1300|30||TOKENREQUEST|1000|8]
+18:05:30 - Sending message [8|1000|33||TOKENREQUEST|1300|4]
+18:05:30 - Sending message [8|1000|32||TOKENREQUEST|1100|28]

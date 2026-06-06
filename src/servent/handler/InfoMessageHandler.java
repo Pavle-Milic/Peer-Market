@@ -21,14 +21,7 @@ public class InfoMessageHandler implements MessageHandler {
             AppConfig.timestampedErrorPrint("Info handler got a message that is not INFO");
             return;
         }
-        int targetId;
-        String[] splitText = clientMessage.getMessageText().split(":");
-        if (splitText.length == 3) {
-            targetId = clientMessage.getTargetId();
-        } else {
-            AppConfig.timestampedErrorPrint("Info message with bad text: " + clientMessage.getMessageText());
-            return;
-        }
+        int targetId = clientMessage.getTargetId();
 
         if(AppConfig.chordState.isKeyMine(targetId)){
             AppConfig.timestampedStandardPrint(clientMessage.getMessageText());

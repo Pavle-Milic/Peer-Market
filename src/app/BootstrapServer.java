@@ -14,6 +14,8 @@ public class BootstrapServer {
 
 	private volatile boolean working = true;
 	private List<Integer> activeServents;
+
+	int counter=0;
 	
 	private class CLIWorker implements Runnable {
 		@Override
@@ -107,6 +109,7 @@ public class BootstrapServer {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			counter++;
 		}
 	}
 	

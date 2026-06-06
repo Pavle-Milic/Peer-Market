@@ -1,7 +1,12 @@
-pause 80000
+pause 20000
 search auto
 search patike
 pause 10000
 info
 print_values
 pause 10000
+search auto
+search patike
+pause 10000
+info
+print_values

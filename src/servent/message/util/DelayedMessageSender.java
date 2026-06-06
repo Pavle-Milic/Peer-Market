@@ -33,6 +33,7 @@ public class DelayedMessageSender implements Runnable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
+
 		
 		if (MessageUtil.MESSAGE_UTIL_PRINTING) {
 			if(messageToSend.getMessageType()!= MessageType.PING && messageToSend.getMessageType()!= MessageType.PONG) {

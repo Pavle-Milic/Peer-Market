@@ -1,23 +1,25 @@
-04:42:53 - Starting servent [24|localhost|1400|4000|10000]
-04:42:53 - Starting listener
-04:42:53 - Starting pinger
-04:42:53 - Starting cli
-04:42:53 - Starting initializer
-04:42:53 - Initializer started
-04:42:53 - Initializer entered run
-04:42:53 - Connecting to bootstrap 2000
-04:42:53 - Pausing for 80000 ms
-04:42:53 - Connected to bootstrap
-04:42:53 - Sending Hail
-04:42:53 - Waiting for response
-04:42:53 - Bootstrap returned port: 1100
-04:42:54 - Sending message [24|1400|0||NEW_NODE|1100|28]
-04:42:56 - Got message [28|1100|18||WELCOME|1400|24]
-04:42:56 - Sending message [24|1400|1||UPDATE|1100|28]
-04:43:00 - Got message [24|1400|24|1100,1200,1300,1000|UPDATE|1400|24]
-04:43:05 - Got message [44|1500|29||NEW_NODE|1400|24]
-04:43:06 - Sending message [44|1500|8||NEW_NODE|1100|28]
-04:43:07 - Got message [4|1300|24|28:51:20|CONFIRMPUT|1400|24]
-04:43:08 - Sending message [24|1400|12|28:51:20|CONFIRMPUT|1100|28]
-04:43:13 - Got message [44|1500|42|1200,1300,1000|UPDATE|1400|24]
-04:43:13 - Sending message [44|1500|18|1200,1300,1000,1400|UPDATE|1100|28]
+17:58:55 - Starting servent [24|localhost|1400|4000|10000]
+17:58:55 - Starting listener
+17:58:55 - Starting pinger
+17:58:55 - Starting cli
+17:58:55 - Starting initializer
+17:58:55 - Initializer started
+17:58:55 - Initializer entered run
+17:58:55 - Connecting to bootstrap 2000
+17:58:55 - Pausing for 20000 ms
+17:58:55 - Connected to bootstrap
+17:58:55 - Sending Hail
+17:58:55 - Waiting for response
+17:58:55 - Bootstrap returned port: 1000
+17:58:55 - Sending message [24|1400|0||NEW_NODE|1000|8]
+18:05:31 - No such key: 51
+18:05:31 - No such key: 0
+18:05:31 - Pausing for 10000 ms
+18:05:41 - My info: [24|localhost|1400|4000|10000]
+18:05:41 - Value map je prazna.
+18:05:41 - Pausing for 10000 ms
+18:05:51 - No such key: 51
+18:05:51 - No such key: 0
+18:05:51 - Pausing for 10000 ms
+18:06:01 - My info: [24|localhost|1400|4000|10000]
+18:06:01 - Value map je prazna.

@@ -32,8 +32,6 @@ public class BuyHandler implements MessageHandler{
             } else {
                 AppConfig.timestampedErrorPrint("Got buy message with bad text: " + clientMessage.getMessageText());
             }
-
-
         } else {
             AppConfig.timestampedErrorPrint("Buy handler got a message that is not BUY");
         }

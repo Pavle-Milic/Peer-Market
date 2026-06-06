@@ -3,6 +3,7 @@ package cli.command;
 import app.AppConfig;
 import app.Pinger;
 import cli.CLIParser;
+import mutex.GrindingRoom;
 import servent.SimpleServentListener;
 
 public class StopCommand implements CLICommand {
@@ -28,6 +29,7 @@ public class StopCommand implements CLICommand {
 		parser.stop();
 		listener.stop();
 		pinger.stop();
+		GrindingRoom.finallyTimeForLeagueOfLegends();
 	}
 
 }

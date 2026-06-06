@@ -1,6 +1,5 @@
-pause 40000
+
 list_item auto 20
-pause 10000
+
 info
 print_values
-pause 10000

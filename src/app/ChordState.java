@@ -8,6 +8,9 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import mutex.GrindingRoom;
+import mutex.jobs.BuyJob;
+import mutex.jobs.PutJob;
 import servent.message.*;
 import servent.message.util.MessageUtil;
 
@@ -54,6 +57,12 @@ public class ChordState {
 	private Map<Integer, Pair> valueMap;
 
 	private Queue<Pair> seenDeadNodeMessages = new ConcurrentLinkedQueue<>();
+	private Queue<Pair> seenTokenRequestMessages = new ConcurrentLinkedQueue<>();
+	private Map<Integer,Integer> numOfTokenRequests = new ConcurrentHashMap<>();
+
+	private Map<Integer, Integer> tokenMap = new ConcurrentHashMap<>();
+
+	private volatile boolean hasToken = false;
 	
 	public ChordState() {
 		this.chordLevel = 1;
@@ -354,7 +363,7 @@ public class ChordState {
 	/**
 	 * Pomoćna metoda koja šalje izmenjeni par našem neposrednom sledbeniku
 	 */
-	private void backupToSuccessor(int key, Pair pair) {
+    public void backupToSuccessor(int key, Pair pair) {
 		if (successorTable[0] != null && successorTable[0].getListenerPort() != AppConfig.myServentInfo.getListenerPort()) {
 			Message rm = new BackupKeyMessage(AppConfig.myServentInfo.getListenerPort(), successorTable[0].getListenerPort(), key, pair.value(), pair.nodeId());
 			MessageUtil.sendMessage(rm);
@@ -362,48 +371,21 @@ public class ChordState {
 	}
 
 	public void handleKeyBackup(int key, Pair pair) {
-		this.valueMap.put(key, pair);
+		GrindingRoom.work(new PutJob(key, pair.value(), pair.nodeId()));
 	}
 
 	/**
 	 * The Chord put operation. Stores locally if key is ours, otherwise sends it on.
 	 */
 	public void putValue(int key, int value,int originalSenderId) {
-		if (isKeyMine(key)) {
-			if (!valueMap.containsKey(key) && value >0) {
-				Pair noviPair = new Pair(originalSenderId, value);
-				valueMap.put(key, noviPair);
-				backupToSuccessor(key, noviPair);
-				ServentInfo nextNode = getNextNodeForKey(originalSenderId);
-				Message mes = new ConfirmPutMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),originalSenderId,key,value);
-				MessageUtil.sendMessage(mes);
-			} else {
-				Pair currentPair = valueMap.get(key);
-				if (currentPair.value() == 0 && value >0) {
-					Pair noviPair = new Pair(originalSenderId, value);
-					valueMap.put(key, noviPair);
-					backupToSuccessor(key, noviPair);
-					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
-					Message mes = new ConfirmPutMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),originalSenderId,key,value);
-					MessageUtil.sendMessage(mes);
-				} else if (currentPair.nodeId() == originalSenderId && currentPair.value() + value>=0) {
-					Pair noviPair = new Pair(originalSenderId, currentPair.value() + value);
-					valueMap.put(key, noviPair);
-					backupToSuccessor(key, noviPair);
-					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
-					Message mes = new ConfirmPutMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),originalSenderId,key,value);
-					MessageUtil.sendMessage(mes);
-				} else {
-					AppConfig.timestampedErrorPrint("Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju");
-					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
-					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId,"Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju" );
-					MessageUtil.sendMessage(mes);
-				}
-			}
+
+		if(!hasToken){
+			GrindingRoom.addToJobQueue(new BuyJob(key, value, originalSenderId));
+			requestToken();
 		} else {
-			ServentInfo nextNode = getNextNodeForKey(key);
-			PutMessage pm = new PutMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, value,originalSenderId);
-			MessageUtil.sendMessage(pm);
+			if(tokenMap.equals(numOfTokenRequests)){
+				GrindingRoom.work(new BuyJob(key, value, originalSenderId));
+			}
 		}
 	}
 
@@ -411,35 +393,41 @@ public class ChordState {
 	 * The Chord buy operation. Processes locally if key is ours, otherwise sends it on.
 	 */
 	public void buyValue(int key, int amount, int originalSenderId) {
-		if (isKeyMine(key)) {
-			if (valueMap.containsKey(key)) {
-				Pair currentPair = valueMap.get(key);
 
-				if (currentPair.value() >= amount) {
-					Pair noviPair = new Pair(currentPair.nodeId(), currentPair.value() - amount);
-					valueMap.put(key, noviPair);
-					backupToSuccessor(key, noviPair);
-
-					ServentInfo nextNode = getNextNodeForKey(noviPair.nodeId());
-					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), noviPair.nodeId(), "Kupljeno je  " + amount + "stvari sa kljucem" +  key);
-					MessageUtil.sendMessage(mes);
-					nextNode = getNextNodeForKey(originalSenderId);
-					mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Uspesno ste obavili kupovinu. Kupljeno je  " + amount + "stvari sa kljucem" +  key);
-					MessageUtil.sendMessage(mes);
-				} else {
-					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
-					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, pokusali ste da kupite vise nego sto ima na stanju");
-					MessageUtil.sendMessage(mes);
-				}
-			} else {
-				ServentInfo nextNode = getNextNodeForKey(originalSenderId);
-				Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem");
-				MessageUtil.sendMessage(mes);
-			}
+		if(!hasToken){
+			GrindingRoom.addToJobQueue(new BuyJob(key, amount, originalSenderId));
+			requestToken();
 		} else {
-			ServentInfo nextNode = getNextNodeForKey(key);
-			Message bm = new BuyMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, amount, originalSenderId);
-			MessageUtil.sendMessage(bm);
+			if(tokenMap.equals(numOfTokenRequests)){
+				GrindingRoom.work(new BuyJob(key, amount, originalSenderId));
+			}
+		}
+	}
+
+	private void requestToken() {
+
+		int myId = AppConfig.myServentInfo.getChordId();
+
+		int requestNumber = numOfTokenRequests.getOrDefault(myId, 0) + 1;
+		numOfTokenRequests.put(myId, requestNumber);
+
+		seenTokenRequestMessages.add(new Pair(myId, requestNumber));
+
+		Set<Integer> portsToNotify = new LinkedHashSet<>();
+
+		for (ServentInfo node : successorTable) {
+			if (node != null && node.getChordId() != myId) {
+				portsToNotify.add(node.getListenerPort());
+			}
+		}
+
+		if (predecessorInfo != null && predecessorInfo.getChordId() != myId) {
+			portsToNotify.add(predecessorInfo.getListenerPort());
+		}
+
+		for (int port : portsToNotify) {
+			Message msg = new TokenRequestMessage(AppConfig.myServentInfo.getListenerPort(), port, myId, requestNumber);
+			MessageUtil.sendMessage(msg);
 		}
 	}
 
@@ -504,8 +492,26 @@ public class ChordState {
 		return false;
 	}
 
+	public boolean hasSeenRequestTokenMessage(int requesterId, int requesterCount) {
+		for (Pair seen : seenTokenRequestMessages) {
+			if (seen.nodeId() == requesterId && seen.value() == requesterCount) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void addSeenDeadNodeMessage(int deadNodeId, int id) {
 		seenDeadNodeMessages.add(new Pair(deadNodeId, id));
+	}
+
+	public void addSeenTokenRequestMessage(int requesterId, int requesterCount) {
+		seenTokenRequestMessages.add(new Pair(requesterId, requesterCount));
+	}
+
+	public void updateTokenRequest(int requesterId, int requesterCount) {
+		int currentCount = numOfTokenRequests.getOrDefault(requesterId, 0);
+		numOfTokenRequests.put(requesterId, Math.max(currentCount, requesterCount));
 	}
 
 	public void removeDeadNode(int deadNodeId) {
@@ -553,13 +559,13 @@ public class ChordState {
 		}
 	}
 
-	public void notifyNeighbors(int deadNodeId, int id) {
+	public void notifyNeighbors(int deadNodeId, int id, MessageType type) {
 		Set<Integer> portsToNotify = new LinkedHashSet<>();
 
 		for (ServentInfo node : successorTable) {
 			if (node != null) {
 				int nodeId = node.getChordId();
-				if (nodeId != AppConfig.myServentInfo.getChordId() && nodeId != deadNodeId) {
+				if (nodeId != AppConfig.myServentInfo.getChordId()) {
 					portsToNotify.add(node.getListenerPort());
 				}
 			}
@@ -567,22 +573,50 @@ public class ChordState {
 
 		if (predecessorInfo != null) {
 			int predId = predecessorInfo.getChordId();
-			if (predId != AppConfig.myServentInfo.getChordId() && predId != deadNodeId) {
+			if (predId != AppConfig.myServentInfo.getChordId()) {
 				portsToNotify.add(predecessorInfo.getListenerPort());
 			}
 		}
 
 		for (int port : portsToNotify) {
+			if(type==MessageType.DEADNODE){
 			Message msg = new DeadNodeMessage(
 					AppConfig.myServentInfo.getListenerPort(),
 					port, deadNodeId, id);
 			MessageUtil.sendMessage(msg);
+			}else if(type==MessageType.TOKENREQUEST){
+				Message msg = new TokenRequestMessage(
+						AppConfig.myServentInfo.getListenerPort(),
+						port, deadNodeId, id);
+				MessageUtil.sendMessage(msg);
+			}
+
 		}
 	}
 
 	public void deadNode(int deadNodeId, int id) {
 		addSeenDeadNodeMessage(deadNodeId, id);
-		notifyNeighbors(deadNodeId, id);
+		notifyNeighbors(deadNodeId, id, MessageType.DEADNODE);
 		removeDeadNode(deadNodeId);
+	}
+
+	public boolean holingToken(){
+		return hasToken;
+	}
+
+	public void setToken(boolean has){
+		this.hasToken=has;
+	}
+
+	public Map<Integer, Integer> getNumOfTokenRequests() {
+		return numOfTokenRequests;
+	}
+
+	public Map<Integer, Integer> getTokenMap() {
+		return tokenMap;
+	}
+
+	public void setTokenMap(Map<Integer, Integer> tokenMap) {
+		this.tokenMap = tokenMap;
 	}
 }

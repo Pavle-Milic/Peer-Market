@@ -1,6 +1,8 @@
 package app;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is an immutable class that holds all the information for a servent.
@@ -13,6 +15,7 @@ public class ServentInfo implements Serializable {
 	private final int chordId;
 	private int low;
 	private int high;
+	private List<Integer> subscribers = new ArrayList<>();
 	
 	public ServentInfo(String ipAddress, int listenerPort) {
 		this.ipAddress = ipAddress;
@@ -48,6 +51,14 @@ public class ServentInfo implements Serializable {
 
 	public int getHigh(){
 		return high;
+	}
+
+	public void addSubscriber(int id) {
+		subscribers.add(id);
+	}
+
+	public List<Integer> getSubscribers() {
+		return subscribers;
 	}
 	
 	@Override

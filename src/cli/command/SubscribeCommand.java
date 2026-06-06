@@ -1,11 +1,6 @@
 package cli.command;
 
 import app.AppConfig;
-import app.ChordState;
-import servent.message.SubscribeMessage;
-import servent.message.util.MessageUtil;
-
-import java.util.Objects;
 
 public class SubscribeCommand implements CLICommand{
 
@@ -17,11 +12,11 @@ public class SubscribeCommand implements CLICommand{
     @Override
     public void execute(String args) {
         try {
-            int port = Integer.parseInt(args);
-            SubscribeMessage mes = new SubscribeMessage(AppConfig.myServentInfo.getListenerPort(),port);
-            MessageUtil.sendMessage(mes);
+            int subscribeToId = Integer.parseInt(args);
+            int subscriberId = AppConfig.myServentInfo.getChordId();
+            AppConfig.chordState.subscribe(subscribeToId, subscriberId);
         } catch (NumberFormatException e) {
-            AppConfig.timestampedErrorPrint("Invalid argument for soubscribe: " + args + ". Should be port, which is an int.");
+            AppConfig.timestampedErrorPrint("Invalid argument for soubscribe: " + args + ". Should be id, which is an int.");
         }
     }
 }

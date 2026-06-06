@@ -1,147 +1,38 @@
-05:49:14 - Starting servent [48|localhost|1200|4000|10000]
-05:49:14 - Starting listener
-05:49:14 - Starting pinger
-05:49:14 - Starting cli
-05:49:14 - Starting initializer
-05:49:14 - Initializer started
-05:49:14 - Initializer entered run
-05:49:14 - Connecting to bootstrap 2000
-05:49:14 - Pausing for 40000 ms
-05:49:14 - Connected to bootstrap
-05:49:14 - Sending Hail
-05:49:14 - Waiting for response
-05:49:14 - Bootstrap returned port: 1100
-05:49:15 - Sending message [48|1200|0||NEW_NODE|1100|28]
-05:49:16 - Got message [28|1100|0||WELCOME|1200|48]
-05:49:16 - Sending message [48|1200|1||UPDATE|1100|28]
-05:49:18 - Got message [48|1200|2|1100|UPDATE|1200|48]
-05:49:25 - Got message [4|1300|0||NEW_NODE|1200|48]
-05:49:26 - Sending message [4|1300|24||NEW_NODE|1100|28]
-05:49:30 - Got message [4|1300|39|1100|UPDATE|1200|48]
-05:49:30 - Sending message [4|1300|43|1100,1200|UPDATE|1300|4]
-05:49:36 - Got message [24|1400|0||SUBSCRIBE|1200|48]
-05:49:37 - Sending message [48|1200|79|Sucessfully Subscribed to the node on port1200|NOTIFYSUBSCRIBERS|1400|24]
-05:49:39 - Got message [24|1400|106|1100|UPDATE|1200|48]
-05:49:40 - Sending message [24|1400|106|1100,1200|UPDATE|1300|4]
-05:49:49 - Got message [0|1600|208|1300,1400,1100|UPDATE|1200|48]
-05:49:51 - Sending message [0|1600|202|1300,1400,1100,1200|UPDATE|1600|0]
-05:49:54 - Got message [28|1100|255||ASKPING|1200|48]
-05:49:54 - Pausing for 10000 ms
-05:49:54 - Sending message [48|1200|252||ASKPONG|1600|0]
-05:49:55 - Sending message [48|1200|261|1200 list 20 auto|NOTIFYSUBSCRIBERS|1400|24]
-05:49:56 - Sending message [48|1200|260|51:20:1200|PUT|1600|0]
-05:50:00 - Got message [28|1100|327||ASKPING|1200|48]
-05:50:01 - Sending message [48|1200|344||ASKPONG|1600|0]
-05:50:01 - Got message [20|1700|335|1400,1100|UPDATE|1200|48]
-05:50:02 - Sending message [20|1700|362|1400,1100,1200|UPDATE|1600|0]
-05:50:04 - My info: [48|localhost|1200|4000|10000]
-05:50:04 - Value map je prazna.
-05:50:04 - Pausing for 10000 ms
-05:50:15 - Got message [20|1700|121||ASKPING|1200|48]
-05:50:15 - Got message [28|1100|492||ASKPING|1200|48]
-05:50:16 - Got message [28|1100|504|0:5:1400|PUT|1200|48]
-05:50:16 - Sending message [48|1200|581||ASKPONG|1100|28]
-05:50:17 - Sending message [48|1200|591||ASKPONG|1600|0]
-05:50:17 - Sending message [48|1200|601|0:5:1400|PUT|1600|0]
-05:50:37 - Got message [28|1100|725||ASKPING|1200|48]
-05:50:37 - Sending message [48|1200|978||ASKPONG|1600|0]
-05:50:45 - Got message [28|1100|829|51:10:1100|BUY|1200|48]
-05:50:46 - Sending message [48|1200|1132|51:10:1100|BUY|1600|0]
-05:50:48 - Got message [0|1600|733|servant on port 1100 bought 10 things with the key 51|INFO|1200|48]
-05:51:05 - Got message [20|1700|850||ASKPING|1200|48]
-05:51:07 - Sending message [48|1200|1492||ASKPONG|1100|28]
-05:51:12 - Got message [20|1700|932||ASKPING|1200|48]
-05:51:13 - Sending message [48|1200|1612||ASKPONG|1100|28]
-05:51:18 - Got message [20|1700|1025||ASKPING|1200|48]
-05:51:19 - Sending message [48|1200|1711||ASKPONG|1100|28]
-05:51:25 - Got message [20|1700|1119||ASKPING|1200|48]
-05:51:26 - Sending message [48|1200|1838||ASKPONG|1100|28]
-05:51:34 - Got message [28|1100|1370||ASKPING|1200|48]
-05:51:35 - Sending message [48|1200|1998||ASKPONG|1600|0]
-05:51:48 - Got message [28|1100|1530||ASKPING|1200|48]
-05:51:49 - Sending message [48|1200|2250||ASKPONG|1600|0]
-05:51:51 - Got message [20|1700|1504||ASKPING|1200|48]
-05:51:52 - Sending message [48|1200|2291||ASKPONG|1100|28]
-05:51:55 - Got message [28|1100|1607||ASKPING|1200|48]
-05:51:56 - Sending message [48|1200|2372||ASKPONG|1600|0]
-05:52:09 - Got message [28|1100|1774||ASKPING|1200|48]
-05:52:11 - Sending message [48|1200|2628||ASKPONG|1600|0]
-05:52:15 - Got message [20|1700|1869||ASKPING|1200|48]
-05:52:16 - Sending message [48|1200|2742||ASKPONG|1100|28]
-05:52:18 - Got message [28|1100|1863||ASKPING|1200|48]
-05:52:19 - Sending message [48|1200|2786||ASKPONG|1600|0]
-05:52:21 - Got message [20|1700|1947||ASKPING|1200|48]
-05:52:22 - Sending message [48|1200|2848||ASKPONG|1100|28]
-05:52:46 - Got message [20|1700|2317||ASKPING|1200|48]
-05:52:47 - Got message [28|1100|2192||ASKPING|1200|48]
-05:52:47 - Sending message [48|1200|3298||ASKPONG|1100|28]
-05:52:47 - Sending message [48|1200|3308||ASKPONG|1600|0]
-05:52:54 - Got message [28|1100|2272||ASKPING|1200|48]
-05:52:55 - Sending message [48|1200|3439||ASKPONG|1600|0]
-05:52:58 - Got message [20|1700|2508||ASKPING|1200|48]
-05:52:59 - Sending message [48|1200|3522||ASKPONG|1100|28]
-05:53:02 - Got message [28|1100|2366||ASKPING|1200|48]
-05:53:04 - Sending message [48|1200|3594||ASKPONG|1600|0]
-05:53:21 - Got message [24|1400|3784||ASKPING|1200|48]
-05:53:22 - Got message [4|1300|3854||ASKPING|1200|48]
-05:53:22 - Got message [0|1600|2988||ASKPING|1200|48]
-05:53:22 - Sending message [48|1200|3925||ASKPONG|1700|20]
-05:53:22 - Sending message [48|1200|3934||ASKPONG|1700|20]
-05:53:23 - Sending message [48|1200|3928||ASKPING|1600|0]
-05:53:23 - Sending message [48|1200|3942||ASKPONG|1700|20]
-05:53:27 - Cvor 1700 uklonjen iz chorda
-05:53:28 - Got message [4|1300|3940||DEADNODE|1200|48]
-05:53:28 - Cvor 1700 uklonjen iz chorda
-05:53:28 - Sending message [48|1200|4012||DEADNODE|1100|28]
-05:53:28 - Got message [0|1600|3055||DEADNODE|1200|48]
-05:53:28 - Cvor 1700 uklonjen iz chorda
-05:53:28 - Got message [24|1400|3874||DEADNODE|1200|48]
-05:53:28 - Cvor 1700 uklonjen iz chorda
-05:53:28 - Sending message [48|1200|4011||DEADNODE|1600|0]
-05:53:28 - Got message [0|1600|3062||DEADNODE|1200|48]
-05:53:28 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:29 - Sending message [48|1200|4027||DEADNODE|1600|0]
-05:53:29 - Sending message [48|1200|4029||DEADNODE|1100|28]
-05:53:29 - Sending message [48|1200|4022||DEADNODE|1600|0]
-05:53:29 - Got message [0|1600|3074||DEADNODE|1200|48]
-05:53:29 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:29 - Sending message [48|1200|4018||DEADNODE|1100|28]
-05:53:29 - Got message [28|1100|2672||DEADNODE|1200|48]
-05:53:29 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:29 - Sending message [48|1200|4017||DEADNODE|1400|24]
-05:53:29 - Sending message [48|1200|4023||DEADNODE|1400|24]
-05:53:29 - Sending message [48|1200|4016||DEADNODE|1600|0]
-05:53:29 - Got message [0|1600|3066||DEADNODE|1200|48]
-05:53:29 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:29 - Got message [28|1100|2678||DEADNODE|1200|48]
-05:53:29 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:29 - Sending message [48|1200|4024||DEADNODE|1100|28]
-05:53:29 - Got message [24|1400|3900||DEADNODE|1200|48]
-05:53:29 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:29 - Got message [4|1300|3968||DEADNODE|1200|48]
-05:53:29 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:29 - Got message [4|1300|3982||DEADNODE|1200|48]
-05:53:30 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:30 - Sending message [48|1200|4028||DEADNODE|1400|24]
-05:53:30 - Got message [24|1400|3905||DEADNODE|1200|48]
-05:53:30 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:30 - Got message [4|1300|3973||DEADNODE|1200|48]
-05:53:30 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:30 - Got message [24|1400|3915||DEADNODE|1200|48]
-05:53:30 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:30 - Got message [28|1100|2691||DEADNODE|1200|48]
-05:53:30 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:30 - Got message [28|1100|2699||DEADNODE|1200|48]
-05:53:30 - Vec vidjena DeadNode poruka za port 1700, ignorisem.
-05:53:54 - Got message [28|1100|2955||ASKPING|1200|48]
-05:53:55 - Sending message [48|1200|4397||ASKPONG|1600|0]
-05:54:39 - Got message [28|1100|3449||ASKPING|1200|48]
-05:54:41 - Sending message [48|1200|5041||ASKPONG|1600|0]
-05:54:47 - Got message [28|1100|3542||ASKPING|1200|48]
-05:54:48 - Sending message [48|1200|5154||ASKPONG|1600|0]
-05:54:55 - Got message [28|1100|3618||ASKPING|1200|48]
-05:54:55 - Sending message [48|1200|5258||ASKPONG|1600|0]
-05:56:15 - Got message [28|1100|4504||ASKPING|1200|48]
-05:56:17 - Sending message [48|1200|6420||ASKPONG|1600|0]
-05:56:23 - Got message [28|1100|4584||ASKPING|1200|48]
-05:56:24 - Sending message [48|1200|6530||ASKPONG|1600|0]
+04:42:23 - Starting servent [28|localhost|1100|4000|10000]
+04:42:23 - Starting listener
+04:42:23 - Starting pinger
+04:42:23 - Starting cli
+04:42:23 - Starting initializer
+04:42:23 - Initializer started
+04:42:23 - Initializer entered run
+04:42:23 - Connecting to bootstrap 2000
+04:42:23 - Pausing for 40000 ms
+04:42:23 - Connected to bootstrap
+04:42:23 - Sending Hail
+04:42:23 - Waiting for response
+04:42:23 - Bootstrap returned port: 1000
+04:42:24 - Sending message [28|1100|0||NEW_NODE|1000|8]
+04:42:24 - Got message [8|1000|0||WELCOME|1100|28]
+04:42:25 - Sending message [28|1100|1||UPDATE|1000|8]
+04:42:27 - Got message [28|1100|1|1000|UPDATE|1100|28]
+04:42:36 - Got message [48|1200|5|1000|UPDATE|1100|28]
+04:42:38 - Sending message [48|1200|5|1000,1100|UPDATE|1200|48]
+04:42:48 - Got message [4|1300|12|1000|UPDATE|1100|28]
+04:42:49 - Sending message [4|1300|11|1000,1100|UPDATE|1200|48]
+04:42:52 - Got message [4|1300|10|48:4|SUBSCRIBE|1100|28]
+04:42:53 - Sending message [28|1100|13|48:4|SUBSCRIBE|1200|48]
+04:42:54 - Got message [24|1400|0||NEW_NODE|1100|28]
+04:42:56 - Sending message [28|1100|18||WELCOME|1400|24]
+04:42:56 - Got message [24|1400|1||UPDATE|1100|28]
+04:42:57 - Sending message [24|1400|19|1100|UPDATE|1200|48]
+04:43:03 - Pausing for 10000 ms
+04:43:04 - Sending message [28|1100|28|51:20:28|PUT|1200|48]
+04:43:06 - Got message [44|1500|8||NEW_NODE|1100|28]
+04:43:07 - Sending message [44|1500|33||NEW_NODE|1200|48]
+04:43:08 - Got message [24|1400|12|28:51:20|CONFIRMPUT|1100|28]
+04:43:08 - Uspesno listirani proizvodi sa id-em 51
+04:43:13 - My info: [28|localhost|1100|4000|10000]
+04:43:13 - Value map je prazna.
+04:43:13 - Pausing for 10000 ms
+04:43:13 - Got message [44|1500|18|1200,1300,1000,1400|UPDATE|1100|28]
+04:43:14 - Sending message [44|1500|42|1200,1300,1000,1400,1100|UPDATE|1500|44]

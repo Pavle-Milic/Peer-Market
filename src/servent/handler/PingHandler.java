@@ -19,7 +19,7 @@ public class PingHandler implements MessageHandler{
     @Override
     public void run() {
         if (clientMessage.getMessageType() == MessageType.PING) {
-            Message message = new PongMessage(clientMessage.getSenderPort(), AppConfig.myServentInfo.getListenerPort());
+            Message message = new PongMessage( AppConfig.myServentInfo.getListenerPort(),clientMessage.getSenderPort());
             MessageUtil.sendMessage(message);
             Pinger.nodePonged(clientMessage.getSenderPort());
         } else {

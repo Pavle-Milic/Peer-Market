@@ -98,20 +98,25 @@ public class SimpleServentListener implements Runnable, Cancellable {
 						messageHandler = new PingHandler(clientMessage);
 						break;
 					case ASKPING:
-						messageHandler = new AskPingHandler((AskPingMessage) clientMessage);
+						messageHandler = new AskPingHandler(clientMessage);
 						break;
 					case PONG:
 						messageHandler = new PongHandler(clientMessage);
 						break;
 					case ASKPONG:
-						messageHandler = new AskPongHandler((AskPongMessage) clientMessage);
+						messageHandler = new AskPongHandler(clientMessage);
 						break;
 					case DEADNODE:
 						messageHandler = new DeadNodeHandler((DeadNodeMessage) clientMessage,pinger,cliParser,this);
 						break;
 					case INFO:
+						messageHandler = new InfoMessageHandler((InfoMessage) clientMessage);
 						break;
 					case NOTIFYSUBSCRIBERS:
+						messageHandler = new NotifySubscribersHandler((NotifySubscribersMessage) clientMessage);
+						break;
+					case CONFIRMPUT:
+						messageHandler = new ConfirmPutHandler(clientMessage);
 						break;
 				case POISON:
 					break;

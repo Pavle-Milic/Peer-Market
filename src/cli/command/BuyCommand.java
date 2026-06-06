@@ -27,7 +27,7 @@ public class BuyCommand implements CLICommand{
                     throw new NumberFormatException();
                 }
 
-                AppConfig.chordState.buyValue(key, count,AppConfig.myServentInfo.getListenerPort());
+                AppConfig.chordState.buyValue(key, count,AppConfig.myServentInfo.getChordId());
             } catch (NumberFormatException e) {
                 AppConfig.timestampedErrorPrint("Invalid name and count pair. Both should be ints. 0 <= key <= " + ChordState.CHORD_SIZE
                         + ". 0 <= value.");

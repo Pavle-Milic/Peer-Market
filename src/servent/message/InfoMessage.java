@@ -1,7 +1,13 @@
 package servent.message;
 
 public class InfoMessage extends BasicMessage{
-    public InfoMessage(int senderPort, int receiverPort, String messageText) {
+
+    int targetId;
+    public InfoMessage(int senderPort, int receiverPort,int targetId,  String messageText) {
         super(MessageType.INFO, senderPort, receiverPort, messageText);
+        this.targetId = targetId;
+    }
+    public int getTargetId() {
+        return targetId;
     }
 }

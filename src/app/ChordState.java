@@ -36,7 +36,7 @@ import servent.message.util.MessageUtil;
  */
 public class ChordState {
 
-	public record Pair(int port, int value) {}
+	public record Pair(int nodeId, int value) {}
 
 	public static int CHORD_SIZE;
 	public static int chordHash(int value) {
@@ -305,7 +305,7 @@ public class ChordState {
 		} else {
 			predecessorInfo = newList.get(newList.size()-1);
 		}
-		
+
 		updateSuccessorTable();
 		clearOutdatedKeys();
 		for (ServentInfo node : successorTable) {
@@ -324,7 +324,7 @@ public class ChordState {
 	 */
 	private void clearOutdatedKeys() {
 		// Ako smo sami ili nas je samo dvoje u prstenu, čuvamo kompletan prsten podataka
-		if (allNodeInfo.size() <= 2) {
+		if (allNodeInfo.size() <= 1) {
 			return;
 		}
 
@@ -356,7 +356,7 @@ public class ChordState {
 	 */
 	private void backupToSuccessor(int key, Pair pair) {
 		if (successorTable[0] != null && successorTable[0].getListenerPort() != AppConfig.myServentInfo.getListenerPort()) {
-			Message rm = new BackupKeyMessage(AppConfig.myServentInfo.getListenerPort(), successorTable[0].getListenerPort(), key, pair.value(), pair.port());
+			Message rm = new BackupKeyMessage(AppConfig.myServentInfo.getListenerPort(), successorTable[0].getListenerPort(), key, pair.value(), pair.nodeId());
 			MessageUtil.sendMessage(rm);
 		}
 	}
@@ -368,29 +368,41 @@ public class ChordState {
 	/**
 	 * The Chord put operation. Stores locally if key is ours, otherwise sends it on.
 	 */
-	public void putValue(int key, int value,int originalSenderPort) {
+	public void putValue(int key, int value,int originalSenderId) {
 		if (isKeyMine(key)) {
 			if (!valueMap.containsKey(key) && value >0) {
-				Pair noviPair = new Pair(originalSenderPort, value);
+				Pair noviPair = new Pair(originalSenderId, value);
 				valueMap.put(key, noviPair);
 				backupToSuccessor(key, noviPair);
+				ServentInfo nextNode = getNextNodeForKey(originalSenderId);
+				Message mes = new ConfirmPutMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),originalSenderId,key,value);
+				MessageUtil.sendMessage(mes);
 			} else {
 				Pair currentPair = valueMap.get(key);
 				if (currentPair.value() == 0 && value >0) {
-					Pair noviPair = new Pair(originalSenderPort, value);
+					Pair noviPair = new Pair(originalSenderId, value);
 					valueMap.put(key, noviPair);
 					backupToSuccessor(key, noviPair);
-				} else if (currentPair.port() == originalSenderPort && currentPair.value() + value>=0) {
-					Pair noviPair = new Pair(originalSenderPort, currentPair.value() + value);
+					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
+					Message mes = new ConfirmPutMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),originalSenderId,key,value);
+					MessageUtil.sendMessage(mes);
+				} else if (currentPair.nodeId() == originalSenderId && currentPair.value() + value>=0) {
+					Pair noviPair = new Pair(originalSenderId, currentPair.value() + value);
 					valueMap.put(key, noviPair);
 					backupToSuccessor(key, noviPair);
+					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
+					Message mes = new ConfirmPutMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),originalSenderId,key,value);
+					MessageUtil.sendMessage(mes);
 				} else {
-					AppConfig.timestampedErrorPrint("Odbijen upis za kljuc " + key + ". Port " + originalSenderPort + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju");
+					AppConfig.timestampedErrorPrint("Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju");
+					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
+					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId,"Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju" );
+					MessageUtil.sendMessage(mes);
 				}
 			}
 		} else {
 			ServentInfo nextNode = getNextNodeForKey(key);
-			PutMessage pm = new PutMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, value,originalSenderPort);
+			PutMessage pm = new PutMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, value,originalSenderId);
 			MessageUtil.sendMessage(pm);
 		}
 	}
@@ -398,41 +410,49 @@ public class ChordState {
 	/**
 	 * The Chord buy operation. Processes locally if key is ours, otherwise sends it on.
 	 */
-	public void buyValue(int key, int amount, int originalSenderPort) {
+	public void buyValue(int key, int amount, int originalSenderId) {
 		if (isKeyMine(key)) {
 			if (valueMap.containsKey(key)) {
 				Pair currentPair = valueMap.get(key);
 
 				if (currentPair.value() >= amount) {
-					Pair noviPair = new Pair(currentPair.port, currentPair.value() - amount);
+					Pair noviPair = new Pair(currentPair.nodeId(), currentPair.value() - amount);
 					valueMap.put(key, noviPair);
 					backupToSuccessor(key, noviPair);
 
-					if(currentPair.port != AppConfig.myServentInfo.getListenerPort()) {
-						Message message = new InfoMessage(AppConfig.myServentInfo.getListenerPort(), currentPair.port, "servant on port " + originalSenderPort + " bought " + amount + " things with the key " + key);
-						MessageUtil.sendMessage(message);
-					}
-					if(originalSenderPort != AppConfig.myServentInfo.getListenerPort()) {
-						Message message = new InfoMessage(AppConfig.myServentInfo.getListenerPort(), originalSenderPort, "Buy successful");
-						MessageUtil.sendMessage(message);
-					}
+					ServentInfo nextNode = getNextNodeForKey(noviPair.nodeId());
+					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), noviPair.nodeId(), "Kupljeno je  " + amount + "stvari sa kljucem" +  key);
+					MessageUtil.sendMessage(mes);
+					nextNode = getNextNodeForKey(originalSenderId);
+					mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Uspesno ste obavili kupovinu. Kupljeno je  " + amount + "stvari sa kljucem" +  key);
+					MessageUtil.sendMessage(mes);
 				} else {
-					if(originalSenderPort != AppConfig.myServentInfo.getListenerPort()) {
-						Message message = new InfoMessage(AppConfig.myServentInfo.getListenerPort(), originalSenderPort, "Buy denied");
-						MessageUtil.sendMessage(message);
-					}
+					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
+					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, pokusali ste da kupite vise nego sto ima na stanju");
+					MessageUtil.sendMessage(mes);
 				}
 			} else {
-				if(originalSenderPort != AppConfig.myServentInfo.getListenerPort()) {
-					Message message = new InfoMessage(AppConfig.myServentInfo.getListenerPort(), originalSenderPort, "Buy denied no such key");
-					MessageUtil.sendMessage(message);
-				}
+				ServentInfo nextNode = getNextNodeForKey(originalSenderId);
+				Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem");
+				MessageUtil.sendMessage(mes);
 			}
 		} else {
 			ServentInfo nextNode = getNextNodeForKey(key);
-			Message bm = new BuyMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, amount, originalSenderPort);
+			Message bm = new BuyMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, amount, originalSenderId);
 			MessageUtil.sendMessage(bm);
 		}
+	}
+
+	public void subscribe(int subscribeTo, int subscriber){
+		ServentInfo nextNode = AppConfig.chordState.getNextNodeForKey(subscribeTo);
+		Message mes=new SubscribeMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), subscribeTo, subscriber);
+		MessageUtil.sendMessage(mes);
+	}
+
+	public void notifySubscribers(int subscriber, String poruka){
+		ServentInfo nextNode = AppConfig.chordState.getNextNodeForKey(subscriber);
+		Message mes = new NotifySubscribersMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),subscriber,poruka);
+		MessageUtil.sendMessage(mes);
 	}
 	
 	/**
@@ -443,7 +463,7 @@ public class ChordState {
 	 *			<li>-2 if we asked someone else</li>
 	 *		   </ul>
 	 */
-	public Pair getValue(int key) {
+	public Pair getValue(int key, int originalSenderId) {
 		if (isKeyMine(key)) {
 			if (valueMap.containsKey(key)) {
 				return valueMap.get(key);
@@ -453,7 +473,7 @@ public class ChordState {
 		}
 		
 		ServentInfo nextNode = getNextNodeForKey(key);
-		AskGetMessage agm = new AskGetMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), String.valueOf(key));
+		AskGetMessage agm = new AskGetMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key + ":" + originalSenderId);
 		MessageUtil.sendMessage(agm);
 		
 		return new Pair(-2,-2);
@@ -471,34 +491,37 @@ public class ChordState {
 
 			String tipPodatka = isKeyMine(key) ? "[MOJ ARTIKAL]" : "[BACKUP]";
 
-			AppConfig.timestampedStandardPrint(tipPodatka + " Kljuc: " + key + " -> Vlasnik(Port): " + pair.port() + ", Stanje: " + pair.value());
+			AppConfig.timestampedStandardPrint(tipPodatka + " Kljuc: " + key + " -> Vlasnik(ID): " + pair.nodeId() + ", Stanje: " + pair.value());
 		}
 	}
 
-	public boolean hasSeenDeadNodeMessage(int deadPort, int id) {
+	public boolean hasSeenDeadNodeMessage(int deadNodeId, int id) {
 		for (Pair seen : seenDeadNodeMessages) {
-			if (seen.port() == deadPort && seen.value() == id) {
+			if (seen.nodeId() == deadNodeId && seen.value() == id) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void addSeenDeadNodeMessage(int deadPort, int id) {
-		seenDeadNodeMessages.add(new Pair(deadPort, id));
+	public void addSeenDeadNodeMessage(int deadNodeId, int id) {
+		seenDeadNodeMessages.add(new Pair(deadNodeId, id));
 	}
 
-	public void removeDeadNode(int deadPort) {
-		allNodeInfo.removeIf(info -> info.getListenerPort() == deadPort);
+	public void removeDeadNode(int deadNodeId) {
+		int oldSuccessorId = (successorTable[0] != null) ? successorTable[0].getChordId() : -1;
+		boolean predecessorDied = false;
 
-		if (predecessorInfo != null && predecessorInfo.getListenerPort() == deadPort) {
+		if (predecessorInfo != null && predecessorInfo.getChordId() == deadNodeId) {
+			predecessorDied = true;
 			if(allNodeInfo.isEmpty()){
 				predecessorInfo = null;
-			}
-			else {
+			} else {
 				predecessorInfo = allNodeInfo.get(allNodeInfo.size()-1);
 			}
 		}
+
+		allNodeInfo.removeIf(info -> info.getChordId() == deadNodeId);
 
 		if (allNodeInfo.isEmpty()) {
 			for (int i = 0; i < chordLevel; i++) {
@@ -508,39 +531,58 @@ public class ChordState {
 			updateSuccessorTable();
 		}
 
-		AppConfig.timestampedStandardPrint("Cvor " + deadPort + " uklonjen iz chorda");
+		boolean successorDied = false;
+		if (successorTable[0] != null && successorTable[0].getChordId() != oldSuccessorId) {
+			successorDied = true;
+		}
+
+		if (predecessorDied || successorDied) {
+			pushPrimaryDataToSuccessor();
+		}
+
+		AppConfig.timestampedStandardPrint("Cvor " + deadNodeId + " uklonjen iz chorda");
 	}
 
-	public void notifyNeighbors(int deadPort, int id) {
+	private void pushPrimaryDataToSuccessor() {
+		if (successorTable[0] != null && successorTable[0].getListenerPort() != AppConfig.myServentInfo.getListenerPort()) {
+			for (Map.Entry<Integer, Pair> entry : valueMap.entrySet()) {
+				if (isKeyMine(entry.getKey())) {
+					backupToSuccessor(entry.getKey(), entry.getValue());
+				}
+			}
+		}
+	}
+
+	public void notifyNeighbors(int deadNodeId, int id) {
 		Set<Integer> portsToNotify = new LinkedHashSet<>();
 
 		for (ServentInfo node : successorTable) {
 			if (node != null) {
-				int port = node.getListenerPort();
-				if (port != AppConfig.myServentInfo.getListenerPort() && port != deadPort) {
-					portsToNotify.add(port);
+				int nodeId = node.getChordId();
+				if (nodeId != AppConfig.myServentInfo.getChordId() && nodeId != deadNodeId) {
+					portsToNotify.add(node.getListenerPort());
 				}
 			}
 		}
 
 		if (predecessorInfo != null) {
-			int predPort = predecessorInfo.getListenerPort();
-			if (predPort != AppConfig.myServentInfo.getListenerPort() && predPort != deadPort) {
-				portsToNotify.add(predPort);
+			int predId = predecessorInfo.getChordId();
+			if (predId != AppConfig.myServentInfo.getChordId() && predId != deadNodeId) {
+				portsToNotify.add(predecessorInfo.getListenerPort());
 			}
 		}
 
 		for (int port : portsToNotify) {
 			Message msg = new DeadNodeMessage(
 					AppConfig.myServentInfo.getListenerPort(),
-					port, deadPort, id);
+					port, deadNodeId, id);
 			MessageUtil.sendMessage(msg);
 		}
 	}
 
-	public void deadNode(int deadPort, int id) {
-		addSeenDeadNodeMessage(deadPort, id);
-		notifyNeighbors(deadPort, id);
-		removeDeadNode(deadPort);
+	public void deadNode(int deadNodeId, int id) {
+		addSeenDeadNodeMessage(deadNodeId, id);
+		notifyNeighbors(deadNodeId, id);
+		removeDeadNode(deadNodeId);
 	}
 }

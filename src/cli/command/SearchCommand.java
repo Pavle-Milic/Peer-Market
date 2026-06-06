@@ -18,7 +18,7 @@ public class SearchCommand implements CLICommand{
         if (splitArgs.length == 1) {
             String name = splitArgs[0];
             int key = ChordState.chordHash(Math.abs(name.hashCode()));
-            ChordState.Pair val = AppConfig.chordState.getValue(key);
+            ChordState.Pair val = AppConfig.chordState.getValue(key, AppConfig.myServentInfo.getChordId());
 
             if (Objects.equals(val, new ChordState.Pair(-2, -2))) {
                 AppConfig.timestampedStandardPrint("Please wait...");

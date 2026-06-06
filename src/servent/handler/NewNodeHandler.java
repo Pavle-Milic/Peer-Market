@@ -1,6 +1,8 @@
 package servent.handler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -51,40 +53,40 @@ public class NewNodeHandler implements MessageHandler {
 				int myId = AppConfig.myServentInfo.getChordId();
 				int hisPredId = hisPred.getChordId();
 				int newNodeId = newNodeInfo.getChordId();
-				
+
 				for (Entry<Integer, ChordState.Pair> valueEntry : myValues.entrySet()) {
-					if (hisPredId == myId) { //i am first and he is second
-						if (myId < newNodeId) {
-							if (valueEntry.getKey() <= newNodeId && valueEntry.getKey() > myId) {
-								hisValues.put(valueEntry.getKey(), valueEntry.getValue());
-							}
-						} else {
-							if (valueEntry.getKey() <= newNodeId || valueEntry.getKey() > myId) {
-								hisValues.put(valueEntry.getKey(), valueEntry.getValue());
-							}
-						}
+					int key = valueEntry.getKey();
+					boolean isMyNewPrimary = false;
+
+					if (newNodeId < myId) {
+						if (key > newNodeId && key <= myId) isMyNewPrimary = true;
+					} else {
+						if (key > newNodeId || key <= myId) isMyNewPrimary = true;
 					}
-					if (hisPredId < myId) { //my old predecesor was before me
-						if (valueEntry.getKey() <= newNodeId) {
-							hisValues.put(valueEntry.getKey(), valueEntry.getValue());
-						}
-					} else { //my old predecesor was after me
-						if (hisPredId > newNodeId) { //new node overflow
-							if (valueEntry.getKey() <= newNodeId || valueEntry.getKey() > hisPredId) {
-								hisValues.put(valueEntry.getKey(), valueEntry.getValue());
-							}
-						} else { //no new node overflow
-							if (valueEntry.getKey() <= newNodeId && valueEntry.getKey() > hisPredId) {
-								hisValues.put(valueEntry.getKey(), valueEntry.getValue());
-							}
-						}
-						
+
+					if (!isMyNewPrimary) {
+						hisValues.put(key, valueEntry.getValue());
 					}
-					
 				}
-				for (Integer key : hisValues.keySet()) { //remove his values from my map
+
+				List<Integer> keysToRemove = new ArrayList<>();
+				for (Integer key : myValues.keySet()) {
+					boolean shouldKeep = false;
+					if (hisPredId < myId) {
+						if (key > hisPredId && key <= myId) shouldKeep = true;
+					} else {
+						if (key > hisPredId || key <= myId) shouldKeep = true;
+					}
+
+					if (!shouldKeep) {
+						keysToRemove.add(key);
+					}
+				}
+
+				for (Integer key : keysToRemove) {
 					myValues.remove(key);
 				}
+
 				AppConfig.chordState.setValueMap(myValues);
 				
 				WelcomeMessage wm = new WelcomeMessage(AppConfig.myServentInfo.getListenerPort(), newNodePort, hisValues);

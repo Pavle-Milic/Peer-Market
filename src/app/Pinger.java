@@ -74,22 +74,28 @@ public class Pinger implements Runnable,Cancellable{
 
     public static void nodePonged(int port){
         if (mapa.containsKey(port)) {
-            mapa.put(port, 0);
+            mapa.put(port, -(AppConfig.myServentInfo.getLow()));
         }
     }
 
     private static void tellRemoveNode(int port){
         mapa.remove(port);
         int id = random.nextInt();
-        AppConfig.chordState.deadNode(port,id);
+        int deadId=ChordState.chordHash(port);
+        AppConfig.chordState.deadNode(deadId,id);
     }
 
     public static void addNode(int port){
-        mapa.putIfAbsent(port, 0);
+        mapa.putIfAbsent(port, -(AppConfig.myServentInfo.getLow()));
     }
 
-    public static void removeNode(int port){
-        mapa.remove(port);
+    public static void removeNode(int deadNodeId){
+        for(ServentInfo s: AppConfig.chordState.getSuccessorTable())
+        {
+            if(s != null && s.getChordId()==deadNodeId){
+                mapa.remove(s.getListenerPort());
+            }
+        }
     }
 
 }

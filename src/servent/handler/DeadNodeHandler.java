@@ -1,6 +1,7 @@
 package servent.handler;
 
 import app.AppConfig;
+import app.ChordState;
 import app.Pinger;
 import app.ServentInfo;
 import cli.CLIParser;
@@ -35,24 +36,24 @@ public class DeadNodeHandler implements MessageHandler {
             return;
         }
 
-        int deadPort = clientMessage.getDeadPort();
-        int id       = clientMessage.getId();
+        int deadNodeId = clientMessage.getPortId();
+        int messageId       = clientMessage.getMessageId();
 
-        if (deadPort == AppConfig.myServentInfo.getListenerPort()) {
+        if (AppConfig.chordState.isKeyMine(deadNodeId)) {
             pinger.stop();
             cliParser.stop();
             sl.stop();
             return;
         }
 
-        if (AppConfig.chordState.hasSeenDeadNodeMessage(deadPort, id)) {
-            AppConfig.timestampedStandardPrint("Vec vidjena DeadNode poruka za port " + deadPort + ", ignorisem.");
+        if (AppConfig.chordState.hasSeenDeadNodeMessage(deadNodeId, messageId)) {
+            AppConfig.timestampedStandardPrint("Vec vidjena DeadNode poruka za node " + deadNodeId + ", ignorisem.");
             return;
         }
-        Pinger.removeNode(deadPort);
+        Pinger.removeNode(deadNodeId);
 
-        AppConfig.chordState.addSeenDeadNodeMessage(deadPort, id);
-        AppConfig.chordState.notifyNeighbors(deadPort, id);
-        AppConfig.chordState.removeDeadNode(deadPort);
+        AppConfig.chordState.addSeenDeadNodeMessage(deadNodeId, messageId);
+        AppConfig.chordState.notifyNeighbors(deadNodeId, messageId);
+        AppConfig.chordState.removeDeadNode(deadNodeId);
     }
 }

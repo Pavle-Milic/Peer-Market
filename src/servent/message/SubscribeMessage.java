@@ -1,5 +1,15 @@
 package servent.message;
 
 public class SubscribeMessage extends BasicMessage{
-    public SubscribeMessage(int senderPort, int receiverPort) { super(MessageType.SUBSCRIBE, senderPort, receiverPort); }
+
+    private int subscribeToId;
+
+    public SubscribeMessage(int senderPort, int receiverPort, int subscribeToId, int subscriberId) {
+        super(MessageType.SUBSCRIBE, senderPort, receiverPort,subscribeToId + ":" + subscriberId);
+        this.subscribeToId = subscribeToId;
+    }
+
+    public int getSubscribeToId() {
+        return subscribeToId;
+    }
 }

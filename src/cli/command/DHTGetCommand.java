@@ -17,7 +17,7 @@ public class DHTGetCommand implements CLICommand {
 		try {
 			int key = Integer.parseInt(args);
 			
-			ChordState.Pair val = AppConfig.chordState.getValue(key);
+			ChordState.Pair val = AppConfig.chordState.getValue(key, AppConfig.myServentInfo.getChordId());
 			
 			if (Objects.equals(val, new ChordState.Pair(-2, -2))) {
 				AppConfig.timestampedStandardPrint("Please wait...");

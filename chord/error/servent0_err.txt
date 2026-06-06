@@ -1,5 +1,0 @@
-05:50:47 - Couldn't handle message: [0|1600|734|Buy successful|INFO|1100|28]
-Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
-	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
-	at cli.CLIParser.run(CLIParser.java:58)
-	at java.base/java.lang.Thread.run(Thread.java:831)

@@ -1,19 +1,19 @@
 package servent.message;
 
 public class DeadNodeMessage extends BasicMessage{
-    int deadPort;
-    int id;
-    public DeadNodeMessage(int senderPort, int receiverPort, int deadPort, int id) {
+    int portId;
+    int messageId;
+    public DeadNodeMessage(int senderPort, int receiverPort,int portId, int messageId) {
         super(MessageType.DEADNODE, senderPort, receiverPort);
-        this.deadPort = deadPort;
-        this.id = id;
+        this.portId = portId;
+        this.messageId = messageId;
     }
 
-    public int getDeadPort() {
-        return deadPort;
+    public int getPortId() {
+        return portId;
     }
 
-    public int getId() {
-        return id;
+    public int getMessageId() {
+        return messageId;
     }
 }

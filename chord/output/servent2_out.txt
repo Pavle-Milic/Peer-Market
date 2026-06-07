@@ -1,20 +1,66 @@
-12:27:04 - Starting servent [4|localhost|1300|4000|10000]
-12:27:04 - Starting listener
-12:27:04 - Starting pinger
-12:27:04 - Starting cli
-12:27:04 - Starting initializer
-12:27:04 - Initializer started
-12:27:04 - Initializer entered run
-12:27:04 - Connecting to bootstrap 2000
-12:27:04 - Pausing for 10000 ms
-12:27:04 - Connected to bootstrap
-12:27:04 - Sending Hail
-12:27:04 - Waiting for response
-12:27:04 - Bootstrap returned port: 1280
-12:27:05 - Sending message [4|1300|0||NEW_NODE|1280|0]
-12:27:07 - Got message [34|1290|4||WELCOME|1300|4]
-12:27:08 - Sending message [4|1300|1||UPDATE|1290|34]
-12:27:10 - Got message [4|1300|7|1290,1280|UPDATE|1300|4]
-12:27:14 - My info: [4|localhost|1300|4000|10000]
-12:27:14 - Value map je prazna.
-12:27:14 - Pausing for 10000 ms
+12:37:40 - Starting servent [4|localhost|1300|4000|10000]
+12:37:40 - Starting listener
+12:37:40 - Starting pinger
+12:37:40 - Starting cli
+12:37:40 - Starting initializer
+12:37:40 - Initializer started
+12:37:40 - Initializer entered run
+12:37:40 - Connecting to bootstrap 2000
+12:37:40 - Pausing for 10000 ms
+12:37:40 - Connected to bootstrap
+12:37:40 - Sending Hail
+12:37:40 - Waiting for response
+12:37:40 - Bootstrap returned port: 1280
+12:37:41 - Sending message [4|1300|0||NEW_NODE|1280|0]
+12:37:43 - Got message [34|1290|3||WELCOME|1300|4]
+12:37:44 - Sending message [4|1300|1||UPDATE|1290|34]
+12:37:46 - Got message [4|1300|5|1290,1280|UPDATE|1300|4]
+12:37:46 - [SYS-NEIGHBORS] my_id:4 neighbors:0,34
+12:37:50 - My info: [4|localhost|1300|4000|10000]
+12:37:50 - Value map je prazna.
+12:37:50 - Pausing for 10000 ms
+12:37:54 - Got message [38|1310|10|1280|UPDATE|1300|4]
+12:37:54 - [SYS-NEIGHBORS] my_id:4 neighbors:0,34
+12:37:55 - Sending message [38|1310|5|1280,1300|UPDATE|1290|34]
+12:38:01 - Got message [8|1320|0||NEW_NODE|1300|4]
+12:38:02 - Sending message [8|1320|11||NEW_NODE|1290|34]
+12:38:06 - Got message [8|1320|23|1290,1310,1280|UPDATE|1300|4]
+12:38:06 - [SYS-NEIGHBORS] my_id:4 neighbors:0,8
+12:38:07 - Sending message [8|1320|15|1290,1310,1280,1300|UPDATE|1320|8]
+12:38:12 - Got message [0|1280|30|0:5:38|BACKUPKEY|1300|4]
+12:38:12 - Got message [0|1280|33|Uspesno ste se subscribe-ovali na node 0|NOTIFYSUBSCRIBERS|1300|4]
+12:38:12 - Got message [0|1280|32|38:0:5:38|CONFIRMPUT|1300|4]
+12:38:12 - Got message [0|1280|29|0:5:38|BACKUPKEY|1300|4]
+12:38:12 - Got message [0|1280|31|38:0:5:38|CONFIRMPUT|1300|4]
+12:38:13 - Got message [0|1280|35|51:20:34|BACKUPKEY|1300|4]
+12:38:13 - Got message [0|1280|34|51:20:34|BACKUPKEY|1300|4]
+12:38:13 - Sending message [4|1300|23|38:0:5:38|CONFIRMPUT|1290|34]
+12:38:13 - Sending message [4|1300|21|Uspesno ste se subscribe-ovali na node 0|NOTIFYSUBSCRIBERS|1290|34]
+12:38:14 - Sending message [4|1300|24|38:0:5:38|CONFIRMPUT|1290|34]
+12:38:17 - Got message [42|1330|40|1280|UPDATE|1300|4]
+12:38:17 - [SYS-NEIGHBORS] my_id:4 neighbors:0,8
+12:38:18 - Sending message [42|1330|29|1280,1300|UPDATE|1320|8]
+12:38:24 - Got message [0|1280|52|51:8:20:34|TELL_GET|1300|4]
+12:38:25 - Sending message [4|1300|39|51:8:20:34|TELL_GET|1320|8]
+12:38:27 - Got message [0|1280|56|0:8:5:38|TELL_GET|1300|4]
+12:38:27 - Sending message [4|1300|40|0:8:5:38|TELL_GET|1320|8]
+12:38:39 - Got message [0|1280|73|1330|ASKPING|1300|4]
+12:38:40 - Sending message [4|1300|54|1280|ASKPONG|1330|42]
+12:38:40 - Got message [8|1320|670043760||DEADNODE|1300|4]
+12:38:40 - Cvor 42 uklonjen iz chorda
+12:38:41 - Sending message [4|1300|670043760||DEADNODE|1290|34]
+12:38:41 - Sending message [4|1300|670043760||DEADNODE|1310|38]
+12:38:41 - Sending message [4|1300|670043760||DEADNODE|1320|8]
+12:38:42 - Got message [34|1290|670043760||DEADNODE|1300|4]
+12:38:42 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+12:38:42 - Sending message [4|1300|670043760||DEADNODE|1280|0]
+12:38:42 - Got message [0|1280|81|51:20:34|BACKUPKEY|1300|4]
+12:38:43 - Got message [0|1280|80|0:5:38|BACKUPKEY|1300|4]
+12:38:43 - Got message [0|1280|670043760||DEADNODE|1300|4]
+12:38:43 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+12:38:44 - Got message [0|1280|86|0:8:5:38|TELL_GET|1300|4]
+12:38:44 - Got message [0|1280|84|51:8:20:34|TELL_GET|1300|4]
+12:38:45 - Sending message [4|1300|65|51:8:20:34|TELL_GET|1320|8]
+12:38:45 - Sending message [4|1300|64|0:8:5:38|TELL_GET|1320|8]
+12:39:01 - Got message [0|1280|106|51:10:34|BACKUPKEY|1300|4]
+12:39:01 - Got message [0|1280|107|51:10:34|BACKUPKEY|1300|4]

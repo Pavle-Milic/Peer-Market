@@ -1,22 +1,23 @@
-12:10:27 - Starting servent [42|localhost|1330|3000|7000]
-12:10:27 - Starting listener
-12:10:27 - Starting pinger
-12:10:27 - Starting cli
-12:10:27 - Starting initializer
-12:10:27 - Initializer started
-12:10:27 - Initializer entered run
-12:10:27 - Connecting to bootstrap 2000
-12:10:27 - Pausing for 20000 ms
-12:10:27 - Connected to bootstrap
-12:10:27 - Sending Hail
-12:10:27 - Waiting for response
-12:10:27 - Bootstrap returned port: 1300
-12:10:28 - Sending message [42|1330|0||NEW_NODE|1300|4]
-12:10:33 - Got message [0|1280|41||WELCOME|1330|42]
-12:10:34 - Sending message [42|1330|1||UPDATE|1280|0]
-12:10:39 - Got message [42|1330|34|1280,1300,1320,1290,1310|UPDATE|1330|42]
-12:10:39 - Got message [34|1290|56|51:8|ASK_GET|1330|42]
-12:10:40 - Sending message [42|1330|3|51:8|ASK_GET|1280|0]
-12:10:41 - Got message [38|1310|36|0:8|ASK_GET|1330|42]
-12:10:42 - Sending message [42|1330|5|0:8|ASK_GET|1280|0]
-12:10:47 - Stopping...
+12:38:10 - Starting servent [42|localhost|1330|3000|7000]
+12:38:10 - Starting listener
+12:38:10 - Starting pinger
+12:38:10 - Starting cli
+12:38:10 - Starting initializer
+12:38:10 - Initializer started
+12:38:10 - Initializer entered run
+12:38:10 - Connecting to bootstrap 2000
+12:38:10 - Pausing for 20000 ms
+12:38:10 - Connected to bootstrap
+12:38:10 - Sending Hail
+12:38:10 - Waiting for response
+12:38:10 - Bootstrap returned port: 1290
+12:38:11 - Sending message [42|1330|0||NEW_NODE|1290|34]
+12:38:14 - Got message [0|1280|38||WELCOME|1330|42]
+12:38:15 - Sending message [42|1330|1||UPDATE|1280|0]
+12:38:21 - Got message [42|1330|28|1280,1300,1320,1290,1310|UPDATE|1330|42]
+12:38:21 - [SYS-NEIGHBORS] my_id:42 neighbors:38,0
+12:38:22 - Got message [34|1290|45|51:8|ASK_GET|1330|42]
+12:38:23 - Sending message [42|1330|3|51:8|ASK_GET|1280|0]
+12:38:24 - Got message [38|1310|30|0:8|ASK_GET|1330|42]
+12:38:25 - Sending message [42|1330|6|0:8|ASK_GET|1280|0]
+12:38:30 - Stopping...

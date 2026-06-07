@@ -1,4 +1,4 @@
-12:10:58 - Couldn't send message: [8|1320|678794618||DEADNODE|1330|42]
+12:38:40 - Couldn't send message: [8|1320|670043760||DEADNODE|1330|42]
 Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
 	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
 	at cli.CLIParser.run(CLIParser.java:59)

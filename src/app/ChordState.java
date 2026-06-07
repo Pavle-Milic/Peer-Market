@@ -317,6 +317,19 @@ public class ChordState {
 
 		updateSuccessorTable();
 		clearOutdatedKeys();
+
+		Set<Integer> neighbors = new LinkedHashSet<>();
+		if (predecessorInfo != null) neighbors.add(predecessorInfo.getChordId());
+		if (successorTable[0] != null) neighbors.add(successorTable[0].getChordId());
+
+		StringBuilder sb = new StringBuilder();
+		for (Integer n : neighbors) {
+			sb.append(n).append(",");
+		}
+		if (!sb.isEmpty()) sb.setLength(sb.length() - 1);
+
+		AppConfig.timestampedStandardPrint("[SYS-NEIGHBORS] my_id:" + AppConfig.myServentInfo.getChordId() + " neighbors:" + sb.toString());
+
 		for (ServentInfo node : successorTable) {
 			if (node != null && node.getListenerPort() != AppConfig.myServentInfo.getListenerPort()) {
 				Pinger.addNode(node.getListenerPort());
@@ -332,13 +345,11 @@ public class ChordState {
 	 * Tačno implementira logiku brisanja viškova kada se ubaci novi čvor.
 	 */
 	private void clearOutdatedKeys() {
-		// Ako smo sami ili nas je samo dvoje u prstenu, čuvamo kompletan prsten podataka
 		if (allNodeInfo.size() <= 1) {
 			return;
 		}
 
 		int myId = AppConfig.myServentInfo.getChordId();
-		// Na osnovu allNodeInfo rasporeda, drugi čvor otpozadi je prethodnik našeg prethodnika
 		int predPredId = allNodeInfo.get(allNodeInfo.size() - 2).getChordId();
 
 		for (Integer key : valueMap.keySet()) {
@@ -466,8 +477,7 @@ public class ChordState {
 
 		int myId = AppConfig.myServentInfo.getChordId();
 
-		int requestNumber = numOfTokenRequests.getOrDefault(myId, 0) + 1;
-		numOfTokenRequests.put(myId, requestNumber);
+		int requestNumber = numOfTokenRequests.merge(myId, 1, Integer::sum);
 
 		seenTokenRequestMessages.add(new Pair(myId, requestNumber));
 
@@ -568,8 +578,7 @@ public class ChordState {
 	}
 
 	public void updateTokenRequest(int requesterId, int requesterCount) {
-		int currentCount = numOfTokenRequests.getOrDefault(requesterId, 0);
-		numOfTokenRequests.put(requesterId, Math.max(currentCount, requesterCount));
+		numOfTokenRequests.merge(requesterId, requesterCount, Math::max);
 	}
 
 	public void removeDeadNode(int deadNodeId) {
@@ -628,9 +637,7 @@ public class ChordState {
 					takenItems.add(String.valueOf(key));
 				}
 			}
-			if (!takenItems.isEmpty()) {
-				AppConfig.timestampedStandardPrint("[SYS-BACKUP-TAKEOVER] node:" + deadNodeId + " item_ids:" + String.join(",", takenItems));
-			}
+			AppConfig.timestampedStandardPrint("[SYS-BACKUP-TAKEOVER] node:" + deadNodeId + " item_ids:" + String.join(",", takenItems));
 		}
 
 		AppConfig.timestampedStandardPrint("Cvor " + deadNodeId + " uklonjen iz chorda");

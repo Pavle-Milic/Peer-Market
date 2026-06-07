@@ -31,45 +31,51 @@ public class TokenHandler implements MessageHandler {
 
         if (AppConfig.chordState.isKeyMine(clientMessage.getTargetId())) {
             AppConfig.chordState.setToken(true);
-
             AppConfig.timestampedStandardPrint("[MUTEX-ACQUIRED]");
 
-            GrindingRoom.workWorkWorkWorkWorkWork();
+            boolean shouldPassToken = false;
 
-            while (GrindingRoom.isWorking()) {
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+            do {
+                GrindingRoom.workWorkWorkWorkWorkWork();
 
-            int myId = AppConfig.myServentInfo.getChordId();
-
-            int myCurrentRequestNum = AppConfig.chordState.getNumOfTokenRequests().getOrDefault(myId, 0);
-            mapaTokena.put(myId, myCurrentRequestNum);
-            AppConfig.chordState.setTokenMap(mapaTokena);
-
-            Map<Integer, Integer> numOfTokenRequests = AppConfig.chordState.getNumOfTokenRequests();
-
-            for (Map.Entry<Integer, Integer> entry : numOfTokenRequests.entrySet()) {
-                int nodeId = entry.getKey();
-                int requestCount = entry.getValue();
-
-                int tokenCount = mapaTokena.getOrDefault(nodeId, 0);
-
-                if (requestCount > tokenCount) {
-                    int lastIndex = red.lastIndexOf(nodeId);
-                    boolean jePreblizu = (lastIndex != -1) && ((red.size() - lastIndex) <= 10);
-                    if (!jePreblizu) {
-                        red.add(nodeId);
+                while (GrindingRoom.isWorking()) {
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
-            }
 
-            if (!red.isEmpty()) {
+                int myId = AppConfig.myServentInfo.getChordId();
+                int myCurrentRequestNum = AppConfig.chordState.getNumOfTokenRequests().getOrDefault(myId, 0);
+                mapaTokena.put(myId, myCurrentRequestNum);
+                AppConfig.chordState.setTokenMap(mapaTokena);
+
+                Map<Integer, Integer> numOfTokenRequests = AppConfig.chordState.getNumOfTokenRequests();
+
+                for (Map.Entry<Integer, Integer> entry : numOfTokenRequests.entrySet()) {
+                    int nodeId = entry.getKey();
+                    int requestCount = entry.getValue();
+                    int tokenCount = mapaTokena.getOrDefault(nodeId, 0);
+
+                    if (requestCount > tokenCount) {
+                        int lastIndex = red.lastIndexOf(nodeId);
+                        boolean jePreblizu = (lastIndex != -1) && ((red.size() - lastIndex) <= 6);
+                        if (!jePreblizu) {
+                            red.add(nodeId);
+                        }
+                    }
+                }
+
+                if (!red.isEmpty()) {
+                    shouldPassToken = true;
+                    break;
+                }
+
+            } while (GrindingRoom.isMoreWorkToBeDone());
+
+            if (shouldPassToken) {
                 AppConfig.chordState.setToken(false);
-
                 AppConfig.timestampedStandardPrint("[MUTEX-RELEASED]");
 
                 int nextNodeId = red.remove(0);
@@ -78,7 +84,10 @@ public class TokenHandler implements MessageHandler {
                 String strList = Stringifyer.stringifyList(red);
                 Message msg = new TokenMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), strMap, strList, nextNodeId);
                 MessageUtil.sendMessage(msg);
+            } else {
+                AppConfig.timestampedStandardPrint("[MUTEX-KEPT - no pending requests]");
             }
+
         } else {
             ServentInfo nextNode = AppConfig.chordState.getNextNodeForKey(clientMessage.getTargetId());
             Message msg = new TokenMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), clientMessage.getMapa(), clientMessage.getList(), clientMessage.getTargetId());

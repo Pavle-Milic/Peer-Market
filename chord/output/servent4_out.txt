@@ -1,73 +1,71 @@
-12:10:17 - Starting servent [8|localhost|1320|4000|10000]
-12:10:17 - Starting listener
-12:10:17 - Starting pinger
-12:10:17 - Starting cli
-12:10:17 - Starting initializer
-12:10:17 - Initializer started
-12:10:17 - Initializer entered run
-12:10:17 - Connecting to bootstrap 2000
-12:10:17 - Pausing for 20000 ms
-12:10:17 - Connected to bootstrap
-12:10:17 - Sending Hail
-12:10:17 - Waiting for response
-12:10:17 - Bootstrap returned port: 1310
-12:10:18 - Sending message [8|1320|0||NEW_NODE|1310|38]
-12:10:22 - Got message [34|1290|23||WELCOME|1320|8]
-12:10:24 - Sending message [8|1320|1||UPDATE|1290|34]
-12:10:27 - Got message [8|1320|20|1290,1310,1280,1300|UPDATE|1320|8]
-12:10:29 - Got message [42|1330|24||NEW_NODE|1320|8]
-12:10:29 - Got message [0|1280|33||TOKENREQUEST|1320|8]
-12:10:29 - Sending message [42|1330|3||NEW_NODE|1290|34]
-12:10:30 - Got message [0|1280|37||TOKENREQUEST|1320|8]
-12:10:30 - Got message [38|1310|20||TOKENREQUEST|1320|8]
-12:10:30 - Sending message [8|1320|5||TOKENREQUEST|1280|0]
-12:10:30 - Sending message [8|1320|6||TOKENREQUEST|1300|4]
-12:10:30 - Got message [4|1300|28||TOKENREQUEST|1320|8]
-12:10:31 - Sending message [8|1320|4||TOKENREQUEST|1290|34]
-12:10:31 - Sending message [8|1320|8||TOKENREQUEST|1290|34]
-12:10:31 - Sending message [8|1320|10||TOKENREQUEST|1300|4]
-12:10:31 - Got message [34|1290|39||TOKENREQUEST|1320|8]
-12:10:31 - Got message [34|1290|44||TOKENREQUEST|1320|8]
-12:10:31 - Sending message [8|1320|9||TOKENREQUEST|1280|0]
-12:10:31 - Got message [38|1310|25||TOKENREQUEST|1320|8]
-12:10:32 - Got message [4|1300|33||TOKENREQUEST|1320|8]
-12:10:36 - Got message [42|1330|39|1280,1300|UPDATE|1320|8]
-12:10:36 - Sending message [42|1330|18|1280,1300,1320|UPDATE|1290|34]
-12:10:37 - Please wait...
-12:10:37 - Please wait...
-12:10:37 - Pausing for 10000 ms
-12:10:38 - Sending message [8|1320|19|51:8|ASK_GET|1290|34]
-12:10:39 - Sending message [8|1320|20|0:8|ASK_GET|1290|34]
-12:10:42 - Got message [4|1300|47|51:8:-1|TELL_GET|1320|8]
-12:10:42 - No such key: 51
-12:10:44 - Got message [4|1300|51|0:8:-1|TELL_GET|1320|8]
-12:10:44 - No such key: 0
-12:10:47 - My info: [8|localhost|1320|4000|10000]
-12:10:47 - Value map je prazna.
-12:10:47 - Pausing for 10000 ms
-12:10:50 - [SYS-WEAK-FAIL] node:42 port: 1330
-12:10:52 - Sending message [8|1320|36|1330|ASKPING|1300|4]
-12:10:56 - [SYS-STRONG-FAIL] node:42 port: 1330
-12:10:56 - Cvor 42 uklonjen iz chorda
-12:10:57 - Please wait...
-12:10:57 - Please wait...
-12:10:57 - Pausing for 10000 ms
-12:10:58 - Sending message [8|1320|678794618||DEADNODE|1290|34]
-12:10:58 - Sending message [8|1320|678794618||DEADNODE|1300|4]
-12:10:58 - Sending message [8|1320|678794618||DEADNODE|1330|42]
-12:10:58 - Sending message [8|1320|45|51:8|ASK_GET|1290|34]
-12:10:58 - Sending message [8|1320|46|0:8|ASK_GET|1290|34]
-12:10:58 - Got message [34|1290|678794618||DEADNODE|1320|8]
-12:10:58 - Vec vidjena DeadNode poruka za node 42, ignorisem.
-12:10:59 - Got message [38|1310|678794618||DEADNODE|1320|8]
-12:10:59 - Vec vidjena DeadNode poruka za node 42, ignorisem.
-12:10:59 - Got message [4|1300|678794618||DEADNODE|1320|8]
-12:10:59 - Vec vidjena DeadNode poruka za node 42, ignorisem.
-12:11:00 - Got message [0|1280|678794618||DEADNODE|1320|8]
-12:11:00 - Vec vidjena DeadNode poruka za node 42, ignorisem.
-12:11:02 - Got message [4|1300|73|0:8:-1|TELL_GET|1320|8]
-12:11:02 - No such key: 0
-12:11:03 - Got message [4|1300|76|51:8:-1|TELL_GET|1320|8]
-12:11:03 - No such key: 51
-12:11:07 - My info: [8|localhost|1320|4000|10000]
-12:11:07 - Value map je prazna.
+12:38:00 - Starting servent [8|localhost|1320|4000|10000]
+12:38:00 - Starting listener
+12:38:00 - Starting pinger
+12:38:00 - Starting cli
+12:38:00 - Starting initializer
+12:38:00 - Initializer started
+12:38:00 - Initializer entered run
+12:38:00 - Connecting to bootstrap 2000
+12:38:00 - Pausing for 20000 ms
+12:38:00 - Connected to bootstrap
+12:38:00 - Sending Hail
+12:38:00 - Waiting for response
+12:38:00 - Bootstrap returned port: 1300
+12:38:01 - Sending message [8|1320|0||NEW_NODE|1300|4]
+12:38:03 - Got message [34|1290|18||WELCOME|1320|8]
+12:38:04 - Sending message [8|1320|1||UPDATE|1290|34]
+12:38:07 - Got message [8|1320|15|1290,1310,1280,1300|UPDATE|1320|8]
+12:38:07 - [SYS-NEIGHBORS] my_id:8 neighbors:4,34
+12:38:13 - Got message [0|1280|36|34:51:20:34|CONFIRMPUT|1320|8]
+12:38:13 - Got message [0|1280|37|34:51:20:34|CONFIRMPUT|1320|8]
+12:38:14 - Sending message [8|1320|7|34:51:20:34|CONFIRMPUT|1290|34]
+12:38:15 - Sending message [8|1320|9|34:51:20:34|CONFIRMPUT|1290|34]
+12:38:18 - Got message [42|1330|29|1280,1300|UPDATE|1320|8]
+12:38:18 - [SYS-NEIGHBORS] my_id:8 neighbors:4,34
+12:38:19 - Sending message [42|1330|15|1280,1300,1320|UPDATE|1290|34]
+12:38:20 - Please wait...
+12:38:20 - Please wait...
+12:38:20 - Pausing for 10000 ms
+12:38:21 - Sending message [8|1320|18|51:8|ASK_GET|1290|34]
+12:38:21 - Sending message [8|1320|19|0:8|ASK_GET|1290|34]
+12:38:25 - Got message [4|1300|39|51:8:20:34|TELL_GET|1320|8]
+12:38:25 - [MARKET-SEARCH-RESULT] item_id:51 qty:20 owner_id:34
+12:38:25 - Search je nasao stanje 20 na kljucu 51 owner_id:34
+12:38:27 - Got message [4|1300|40|0:8:5:38|TELL_GET|1320|8]
+12:38:27 - [MARKET-SEARCH-RESULT] item_id:0 qty:5 owner_id:38
+12:38:27 - Search je nasao stanje 5 na kljucu 0 owner_id:38
+12:38:30 - My info: [8|localhost|1320|4000|10000]
+12:38:30 - Value map je prazna.
+12:38:30 - Pausing for 10000 ms
+12:38:33 - [SYS-WEAK-FAIL] node:42 port: 1330
+12:38:35 - Sending message [8|1320|34|1330|ASKPING|1290|34]
+12:38:39 - [SYS-STRONG-FAIL] node:42 port: 1330
+12:38:39 - Cvor 42 uklonjen iz chorda
+12:38:40 - Sending message [8|1320|670043760||DEADNODE|1330|42]
+12:38:40 - Please wait...
+12:38:40 - Please wait...
+12:38:40 - Pausing for 10000 ms
+12:38:40 - Sending message [8|1320|670043760||DEADNODE|1290|34]
+12:38:40 - Sending message [8|1320|670043760||DEADNODE|1300|4]
+12:38:41 - Sending message [8|1320|44|51:8|ASK_GET|1290|34]
+12:38:41 - Sending message [8|1320|45|0:8|ASK_GET|1290|34]
+12:38:41 - Got message [34|1290|670043760||DEADNODE|1320|8]
+12:38:41 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+12:38:41 - Got message [4|1300|670043760||DEADNODE|1320|8]
+12:38:41 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+12:38:42 - Got message [38|1310|670043760||DEADNODE|1320|8]
+12:38:42 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+12:38:42 - Got message [0|1280|670043760||DEADNODE|1320|8]
+12:38:42 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+12:38:45 - Got message [4|1300|65|51:8:20:34|TELL_GET|1320|8]
+12:38:45 - [MARKET-SEARCH-RESULT] item_id:51 qty:20 owner_id:34
+12:38:45 - Search je nasao stanje 20 na kljucu 51 owner_id:34
+12:38:45 - Got message [4|1300|64|0:8:5:38|TELL_GET|1320|8]
+12:38:45 - [MARKET-SEARCH-RESULT] item_id:0 qty:5 owner_id:38
+12:38:45 - Search je nasao stanje 5 na kljucu 0 owner_id:38
+12:38:50 - My info: [8|localhost|1320|4000|10000]
+12:38:50 - Value map je prazna.
+12:39:01 - Got message [0|1280|109|Kupljeno je 10 stvari sa kljucem 51|INFO|1320|8]
+12:39:01 - Got message [0|1280|108|Kupljeno je 10 stvari sa kljucem 51|INFO|1320|8]
+12:39:01 - Sending message [8|1320|66|Kupljeno je 10 stvari sa kljucem 51|INFO|1290|34]
+12:39:01 - Sending message [8|1320|67|Kupljeno je 10 stvari sa kljucem 51|INFO|1290|34]

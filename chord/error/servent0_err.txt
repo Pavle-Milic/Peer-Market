@@ -1,0 +1,7 @@
+12:38:34 - Couldn't send message: [0|1280|66||PING|1330|42]
+12:38:38 - Couldn't send message: [0|1280|71|1290|ASKPONG|1330|42]
+12:38:42 - Couldn't send message: [0|1280|670043760||DEADNODE|1330|42]
+Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
+	at cli.CLIParser.run(CLIParser.java:59)
+	at java.base/java.lang.Thread.run(Thread.java:831)

@@ -569,6 +569,9 @@ public class ChordState {
 		int oldSuccessorId = (successorTable[0] != null) ? successorTable[0].getChordId() : -1;
 		boolean predecessorDied = false;
 
+		int oldRangeStart = (predecessorInfo != null) ? predecessorInfo.getChordId() : -1;
+
+
 		if (predecessorInfo != null && predecessorInfo.getChordId() == deadNodeId) {
 			predecessorDied = true;
 			if(allNodeInfo.isEmpty()){
@@ -595,6 +598,15 @@ public class ChordState {
 
 		if (predecessorDied || successorDied) {
 			pushPrimaryDataToSuccessor();
+		}
+
+		// Ispis kada se proširi opseg odgovornosti
+		if (predecessorDied) {
+			int myId = AppConfig.myServentInfo.getChordId();
+			int newRangeStart = (predecessorInfo != null) ? predecessorInfo.getChordId() : -1;
+			AppConfig.timestampedStandardPrint(
+					"Prosiren opseg odgovornosti: (" + oldRangeStart + ", " + myId + "] -> (" + newRangeStart + ", " + myId + "]"
+			);
 		}
 
 		AppConfig.timestampedStandardPrint("Cvor " + deadNodeId + " uklonjen iz chorda");

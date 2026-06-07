@@ -1,6 +1,7 @@
-pause 10000
+pause 100000
 givetoken
 buy auto 10
+pause 10000
 info
 print_values
 pause 10000

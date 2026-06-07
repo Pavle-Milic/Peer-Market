@@ -1,26 +1,114 @@
-02:48:46 - Starting servent [44|localhost|1500|3000|7000]
-02:48:46 - Starting listener
-02:48:46 - Starting pinger
-02:48:46 - Starting cli
-02:48:46 - Starting initializer
-02:48:46 - Initializer started
-02:48:46 - Initializer entered run
-02:48:46 - Connecting to bootstrap 2000
-02:48:46 - Pausing for 20000 ms
-02:48:46 - Connected to bootstrap
-02:48:46 - Sending Hail
-02:48:46 - Waiting for response
-02:48:46 - Bootstrap returned port: 1200
-02:48:46 - Sending message [44|1500|0||NEW_NODE|1200|48]
-02:48:48 - Got message [48|1200|24||WELCOME|1500|44]
-02:48:48 - Got message [48|1200|29||TOKENREQUEST|1500|44]
-02:48:48 - Sending message [44|1500|1||UPDATE|1200|48]
-02:48:49 - Sending message [44|1500|2||TOKENREQUEST|1200|48]
-02:48:50 - Got message [48|1200|38||TOKENREQUEST|1500|44]
-02:48:51 - Sending message [44|1500|3||TOKENREQUEST|1200|48]
-02:48:51 - Got message [44|1500|41|1200,1300,1000,1400,1100|UPDATE|1500|44]
-02:48:57 - Got message [24|1400|25|51:24|ASK_GET|1500|44]
-02:48:57 - Sending message [44|1500|12|51:24|ASK_GET|1200|48]
-02:48:58 - Got message [28|1100|51|0:24|ASK_GET|1500|44]
-02:48:59 - Sending message [44|1500|14|0:24|ASK_GET|1200|48]
-02:49:06 - Stopping...
+03:15:35 - Starting servent [42|localhost|1330|3000|7000]
+03:15:35 - Starting listener
+03:15:35 - Starting pinger
+03:15:35 - Starting cli
+03:15:35 - Starting initializer
+03:15:35 - Initializer started
+03:15:35 - Initializer entered run
+03:15:35 - Connecting to bootstrap 2000
+03:15:35 - Pausing for 10000 ms
+03:15:36 - Connected to bootstrap
+03:15:36 - Sending Hail
+03:15:36 - Waiting for response
+03:15:36 - Bootstrap returned port: 1320
+03:15:37 - Sending message [42|1330|0||NEW_NODE|1320|8]
+03:15:40 - Got message [0|1280|34||WELCOME|1330|42]
+03:15:41 - Sending message [42|1330|1||UPDATE|1280|0]
+03:15:46 - My info: [42|localhost|1330|3000|7000]
+03:15:46 - Pausing for 5000 ms
+03:15:46 - Got message [42|1330|28|1280,1300,1320,1290,1310|UPDATE|1330|42]
+03:15:47 - Got message [34|1290|44||TOKENREQUEST|1330|42]
+03:15:47 - Got message [34|1290|52|45:80:4|PUT|1330|42]
+03:15:47 - Sending message [42|1330|6||TOKENREQUEST|1310|38]
+03:15:48 - Sending message [42|1330|4||TOKENREQUEST|1280|0]
+03:15:48 - Sending message [42|1330|5||TOKENREQUEST|1290|34]
+03:15:48 - Got message [34|1290|51|49:150:4|PUT|1330|42]
+03:15:48 - Got message [8|1320|19||TOKENREQUEST|1330|42]
+03:15:48 - Got message [38|1310|29|0:100:34|PUT|1330|42]
+03:15:48 - Got message [34|1290|49|44:500:8|PUT|1330|42]
+03:15:48 - Got message [38|1310|31||TOKENREQUEST|1330|42]
+03:15:48 - Got message [0|1280|49||TOKENREQUEST|1330|42]
+03:15:48 - Sending message [42|1330|8|49:150:4|PUT|1280|0]
+03:15:48 - Sending message [42|1330|7|45:80:4|PUT|1280|0]
+03:15:49 - Sending message [42|1330|12||TOKENREQUEST|1290|34]
+03:15:49 - Got message [34|1290|56||TOKENREQUEST|1330|42]
+03:15:49 - Sending message [42|1330|10|44:500:8|PUT|1280|0]
+03:15:49 - Got message [0|1280|64||TOKENREQUEST|1330|42]
+03:15:49 - Got message [0|1280|60||TOKENREQUEST|1330|42]
+03:15:49 - Got message [0|1280|56||TOKENREQUEST|1330|42]
+03:15:49 - Sending message [42|1330|9|0:100:34|PUT|1280|0]
+03:15:49 - Sending message [42|1330|11||TOKENREQUEST|1280|0]
+03:15:50 - Sending message [42|1330|15||TOKENREQUEST|1280|0]
+03:15:50 - Got message [8|1320|25||TOKENREQUEST|1330|42]
+03:15:50 - Sending message [42|1330|13||TOKENREQUEST|1310|38]
+03:15:50 - Sending message [42|1330|17||TOKENREQUEST|1310|38]
+03:15:50 - Got message [38|1310|36|37:300:38|BACKUPKEY|1330|42]
+03:15:50 - Sending message [42|1330|16||TOKENREQUEST|1290|34]
+03:15:50 - Got message [0|1280|68||TOKENREQUEST|1330|42]
+03:15:50 - Got message [0|1280|72||TOKENREQUEST|1330|42]
+03:15:50 - Sending message [42|1330|19||TOKENREQUEST|1290|34]
+03:15:50 - Sending message [42|1330|20||TOKENREQUEST|1310|38]
+03:15:50 - Got message [8|1320|33||TOKENREQUEST|1330|42]
+03:15:50 - Got message [34|1290|69||TOKENREQUEST|1330|42]
+03:15:50 - Got message [38|1310|38|35:120:4|BACKUPKEY|1330|42]
+03:15:50 - Got message [38|1310|39|4:35:120|CONFIRMPUT|1330|42]
+03:15:50 - Got message [8|1320|30||TOKENREQUEST|1330|42]
+03:15:51 - Please wait...
+03:15:51 - Pausing for 10000 ms
+03:15:51 - Sending message [42|1330|18||TOKENREQUEST|1280|0]
+03:15:51 - Sending message [42|1330|29||TOKENREQUEST|1310|38]
+03:15:51 - Got message [34|1290|64||TOKENREQUEST|1330|42]
+03:15:51 - Got message [38|1310|45||TOKEN|1330|42]
+03:15:51 - Sending message [42|1330|25||TOKENREQUEST|1290|34]
+03:15:51 - Sending message [42|1330|28||TOKENREQUEST|1290|34]
+03:15:51 - Got message [8|1320|40||TOKENREQUEST|1330|42]
+03:15:51 - Sending message [42|1330|24||TOKENREQUEST|1280|0]
+03:15:51 - Got message [38|1310|41||TOKENREQUEST|1330|42]
+03:15:51 - Sending message [42|1330|27||TOKENREQUEST|1280|0]
+03:15:51 - Got message [38|1310|48||TOKENREQUEST|1330|42]
+03:15:51 - Got message [34|1290|79||TOKENREQUEST|1330|42]
+03:15:51 - Got message [8|1320|37||TOKENREQUEST|1330|42]
+03:15:51 - Got message [34|1290|74||TOKENREQUEST|1330|42]
+03:15:51 - Sending message [42|1330|32|-4:42|ASK_GET|1280|0]
+03:15:51 - Sending message [42|1330|26||TOKENREQUEST|1310|38]
+03:15:51 - Sending message [42|1330|31|4:35:120|CONFIRMPUT|1280|0]
+03:15:52 - Sending message [42|1330|35||TOKEN|1280|0]
+03:15:52 - Got message [38|1310|53||TOKENREQUEST|1330|42]
+03:15:52 - Sending message [42|1330|33|4:5:42|BUY|1280|0]
+03:15:52 - Got message [38|1310|52|0:38|SUBSCRIBE|1330|42]
+03:15:52 - Got message [38|1310|57||TOKENREQUEST|1330|42]
+03:15:53 - Sending message [42|1330|36|0:38|SUBSCRIBE|1280|0]
+03:15:54 - Got message [38|1310|64|0:4|ASK_GET|1330|42]
+03:15:55 - Got message [38|1310|65|0:20:4|BUY|1330|42]
+03:15:55 - Sending message [42|1330|37|0:4|ASK_GET|1280|0]
+03:15:55 - Got message [38|1310|67|Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem|INFO|1330|42]
+03:15:55 - Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem
+03:15:56 - Sending message [42|1330|38|0:20:4|BUY|1280|0]
+03:15:56 - Got message [38|1310|70|-15:38|ASK_GET|1330|42]
+03:15:57 - Got message [38|1310|72|-4:42:-1|TELL_GET|1330|42]
+03:15:57 - No such key: -4
+03:15:57 - Sending message [42|1330|44|-15:38|ASK_GET|1280|0]
+03:15:57 - Got message [38|1310|71|15:15:38|BUY|1330|42]
+03:15:58 - Sending message [42|1330|47|15:15:38|BUY|1280|0]
+03:15:58 - Got message [38|1310|77||TOKENREQUEST|1330|42]
+03:15:58 - Got message [0|1280|109||TOKENREQUEST|1330|42]
+03:15:58 - Got message [8|1320|60||TOKENREQUEST|1330|42]
+03:15:59 - Sending message [42|1330|49||TOKENREQUEST|1290|34]
+03:15:59 - Got message [34|1290|104||TOKENREQUEST|1330|42]
+03:15:59 - Sending message [42|1330|50||TOKENREQUEST|1310|38]
+03:16:00 - Sending message [42|1330|48||TOKENREQUEST|1280|0]
+03:16:00 - Got message [38|1310|81|Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem|INFO|1330|42]
+03:16:01 - Sending message [42|1330|51|Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem|INFO|1280|0]
+03:16:01 - [BACKUP] Kljuc: 35 -> Vlasnik(ID): 4, Stanje: 120
+03:16:01 - [BACKUP] Kljuc: 37 -> Vlasnik(ID): 38, Stanje: 300
+03:16:01 - Pausing for 10000 ms
+03:16:01 - Got message [34|1290|113|49:34|ASK_GET|1330|42]
+03:16:01 - Got message [38|1310|85|Uspesno ste obavili kupovinu. Kupljeno je 20 stvari sa kljucem 37|INFO|1330|42]
+03:16:02 - Sending message [42|1330|54|49:34|ASK_GET|1280|0]
+03:16:02 - Got message [38|1310|83|37:280:38|BACKUPKEY|1330|42]
+03:16:03 - Sending message [42|1330|56|Uspesno ste obavili kupovinu. Kupljeno je 20 stvari sa kljucem 37|INFO|1280|0]
+03:16:08 - Got message [38|1310|93|Uspesno ste se subscribe-ovali na node 34|NOTIFYSUBSCRIBERS|1330|42]
+03:16:09 - Sending message [42|1330|64|Uspesno ste se subscribe-ovali na node 34|NOTIFYSUBSCRIBERS|1280|0]
+03:16:11 - Pausing for 5000 ms
+03:16:12 - Sending message [42|1330|66|30:42|SUBSCRIBE|1280|0]
+03:16:16 - Stopping...

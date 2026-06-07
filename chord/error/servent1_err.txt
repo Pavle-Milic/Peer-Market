@@ -1,9 +1,2 @@
-Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
-	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
-	at cli.CLIParser.run(CLIParser.java:59)
-	at java.base/java.lang.Thread.run(Thread.java:831)
-02:49:07 - Couldn't send message: [28|1100|62||PONG|1500|44]
-02:49:12 - Couldn't send message: [28|1100|67||PING|1500|44]
-02:49:17 - Couldn't send message: [28|1100|76|1200|ASKPONG|1500|44]
-02:49:17 - Couldn't send message: [28|1100|77|0:24|ASK_GET|1500|44]
-02:49:19 - Couldn't send message: [28|1100|1193888104||DEADNODE|1500|44]
+03:15:45 - Invalid name and count pair. Both should be ints. 0 <= key <= 64. 0 <= value.
+03:15:45 - Invalid name and count pair. Both should be ints. 0 <= key <= 64. 0 <= value.

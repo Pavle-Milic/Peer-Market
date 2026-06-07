@@ -1,8 +1,0 @@
-Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
-	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
-	at cli.CLIParser.run(CLIParser.java:59)
-	at java.base/java.lang.Thread.run(Thread.java:831)
-02:49:11 - Couldn't send message: [48|1200|73||PING|1500|44]
-02:49:12 - Couldn't send message: [48|1200|74|1000|ASKPONG|1500|44]
-02:49:15 - Couldn't send message: [48|1200|75|1300|ASKPONG|1500|44]
-02:49:20 - Couldn't send message: [48|1200|1193888104||DEADNODE|1500|44]

@@ -384,6 +384,7 @@ public class ChordState {
 				ChordState.Pair noviPair = new Pair(originalSenderId, value);
 				if(!hasToken){
 					GrindingRoom.addToJobQueue(new PutJob(key, noviPair));
+					AppConfig.timestampedStandardPrint("[MUTEX-REQUEST] item_id:" + key);
 					requestToken();
 				} else {
 					GrindingRoom.work(new PutJob(key, noviPair));
@@ -394,6 +395,7 @@ public class ChordState {
 					Pair noviPair = new Pair(originalSenderId, value);
 					if(!hasToken){
 						GrindingRoom.addToJobQueue(new PutJob(key, noviPair));
+						AppConfig.timestampedStandardPrint("[MUTEX-REQUEST] item_id:" + key);
 						requestToken();
 					} else {
 						GrindingRoom.work(new PutJob(key, noviPair));
@@ -402,11 +404,13 @@ public class ChordState {
 					Pair noviPair = new Pair(originalSenderId, currentPair.value() + value);
 					if(!hasToken){
 						GrindingRoom.addToJobQueue(new PutJob(key, noviPair));
+						AppConfig.timestampedStandardPrint("[MUTEX-REQUEST] item_id:" + key);
 						requestToken();
 					} else {
 						GrindingRoom.work(new PutJob(key, noviPair));
 					}
 				} else {
+					AppConfig.timestampedStandardPrint("[MARKET-PUT-FAIL] item_id:" + key + " reason:NOT_ENOUGH_STOCK_TO_REMOVE or reason:NOT_THE_OWNER");
 					AppConfig.timestampedErrorPrint("Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju");
 					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
 					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId,"Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju" );
@@ -434,16 +438,19 @@ public class ChordState {
 
 					if(!hasToken){
 						GrindingRoom.addToJobQueue(new BuyJob(key, noviPair, originalSenderId, amount));
+						AppConfig.timestampedStandardPrint("[MUTEX-REQUEST] item_id:" + key);
 						requestToken();
 					} else {
 						GrindingRoom.work(new BuyJob(key, noviPair, originalSenderId, amount));
 					}
 				} else {
+					AppConfig.timestampedStandardPrint("[MARKET-BUY-FAIL] item_id:" + key + " reason:OUT_OF_STOCK");
 					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
 					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, pokusali ste da kupite vise nego sto ima na stanju");
 					MessageUtil.sendMessage(mes);
 				}
 			} else {
+				AppConfig.timestampedStandardPrint("[MARKET-BUY-FAIL] item_id:" + key + " reason:NO_SUCH_KEY");
 				ServentInfo nextNode = getNextNodeForKey(originalSenderId);
 				Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem");
 				MessageUtil.sendMessage(mes);
@@ -607,6 +614,23 @@ public class ChordState {
 			AppConfig.timestampedStandardPrint(
 					"Prosiren opseg odgovornosti: (" + oldRangeStart + ", " + myId + "] -> (" + newRangeStart + ", " + myId + "]"
 			);
+
+			List<String> takenItems = new ArrayList<>();
+			for (Map.Entry<Integer, Pair> entry : valueMap.entrySet()) {
+				int key = entry.getKey();
+				boolean wasDeadNodesKey = false;
+				if (oldRangeStart < deadNodeId) {
+					if (key > oldRangeStart && key <= deadNodeId) wasDeadNodesKey = true;
+				} else {
+					if (key > oldRangeStart || key <= deadNodeId) wasDeadNodesKey = true;
+				}
+				if (wasDeadNodesKey) {
+					takenItems.add(String.valueOf(key));
+				}
+			}
+			if (!takenItems.isEmpty()) {
+				AppConfig.timestampedStandardPrint("[SYS-BACKUP-TAKEOVER] node:" + deadNodeId + " item_ids:" + String.join(",", takenItems));
+			}
 		}
 
 		AppConfig.timestampedStandardPrint("Cvor " + deadNodeId + " uklonjen iz chorda");

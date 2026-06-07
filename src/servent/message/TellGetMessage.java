@@ -4,7 +4,7 @@ public class TellGetMessage extends BasicMessage {
 
 	private static final long serialVersionUID = -6213394344524749872L;
 
-	public TellGetMessage(int senderPort, int receiverPort, int key,int originalSenderId, int value) {
-		super(MessageType.TELL_GET, senderPort, receiverPort, key + ":" + originalSenderId + ":" + value);
+	public TellGetMessage(int senderPort, int receiverPort, int key,int originalSenderId, int value ,int ownerId) {
+		super(MessageType.TELL_GET, senderPort, receiverPort, key + ":" + originalSenderId + ":" + value + ":" + ownerId);
 	}
 }

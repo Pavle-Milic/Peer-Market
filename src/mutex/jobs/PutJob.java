@@ -26,8 +26,12 @@ public class PutJob implements Runnable{
         AppConfig.timestampedStandardPrint("Obavljam put Job ===================================================");
         AppConfig.chordState.getValueMap().put(key, noviPair);
         AppConfig.chordState.backupToSuccessor(key, noviPair);
+
+        AppConfig.timestampedStandardPrint("[MARKET-LIST] item_id:" + key + " qty:" + noviPair.value());
+
+
         ServentInfo nextNode = AppConfig.chordState.getNextNodeForKey(originalSenderId);
-        Message mes = new ConfirmPutMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),originalSenderId,key,noviPair.value());
+        Message mes = new ConfirmPutMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),originalSenderId,key,noviPair.value(), noviPair.nodeId());
         MessageUtil.sendMessage(mes);
     }
 }

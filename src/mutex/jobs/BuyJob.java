@@ -27,6 +27,7 @@ public class BuyJob implements Runnable{
         AppConfig.chordState.getValueMap().put(key, noviPair);
         AppConfig.chordState.backupToSuccessor(key, noviPair);
 
+        AppConfig.timestampedStandardPrint("[MARKET-BUY-SUCCESS] item_id:" + key + " qty_bought:" + amount + " remaining_qty:" + noviPair.value());
 
         ServentInfo nextNode = AppConfig.chordState.getNextNodeForKey(noviPair.nodeId());
         Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), noviPair.nodeId(), "Kupljeno je " + amount + " stvari sa kljucem " +  key);

@@ -1,2 +1,5 @@
-03:15:46 - Invalid name and count pair. Both should be ints. 0 <= key <= 64. 0 <= value.
-03:16:16 - Couldn't send message: [8|1320|88||PING|1300|4]
+12:10:58 - Couldn't send message: [8|1320|678794618||DEADNODE|1330|42]
+Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
+	at cli.CLIParser.run(CLIParser.java:59)
+	at java.base/java.lang.Thread.run(Thread.java:831)

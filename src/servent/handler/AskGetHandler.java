@@ -36,7 +36,7 @@ public class AskGetHandler implements MessageHandler {
 						value = valueMap.get(key).value();
 					}
 					ServentInfo nextNode = AppConfig.chordState.getNextNodeForKey(originalSenderId);
-					TellGetMessage tgm = new TellGetMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, originalSenderId, value);
+					TellGetMessage tgm = new TellGetMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, originalSenderId, value, valueMap.get(key).nodeId());
 					MessageUtil.sendMessage(tgm);
 
 				} else {

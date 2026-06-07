@@ -44,6 +44,8 @@ public class Pinger implements Runnable,Cancellable{
                 }
 
                 if (elapsedTime >= AppConfig.myServentInfo.getLow() && elapsedTime < AppConfig.myServentInfo.getLow() + TICK) {
+                    int susId = ChordState.chordHash(port);
+                    AppConfig.timestampedStandardPrint("[SYS-WEAK-FAIL] node:" + susId + " port: " + port);
                     int randomNeighbor = getRandomPortExcept(port);
                     if (randomNeighbor != -1) {
                         Message mes = new AskPingMessage(AppConfig.myServentInfo.getListenerPort(), randomNeighbor,port);
@@ -52,6 +54,8 @@ public class Pinger implements Runnable,Cancellable{
                 }
 
                 if (elapsedTime >= AppConfig.myServentInfo.getHigh() && elapsedTime <= AppConfig.myServentInfo.getHigh() + TICK) {
+                    int deadId = ChordState.chordHash(port);
+                    AppConfig.timestampedStandardPrint("[SYS-STRONG-FAIL] node:" + deadId + " port: " + port);
                     tellRemoveNode(port);
                 }
                 else{

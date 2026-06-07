@@ -50,6 +50,9 @@ public class TokenRequestHandler implements MessageHandler {
 
                         if (reqCount > tokenMapValue) {
                             AppConfig.chordState.setToken(false);
+
+                            AppConfig.timestampedStandardPrint("[MUTEX-RELEASED]");
+
                             ServentInfo serventInfo = AppConfig.chordState.getNextNodeForKey(reqNodeId);
                             String strMap = Stringifyer.stringifyMap(AppConfig.chordState.getTokenMap());
                             String strList = Stringifyer.stringifyList(new ArrayList<>());

@@ -1,5 +1,5 @@
-pause 100000
 givetoken
+pause 100000
 buy auto 10
 pause 10000
 info

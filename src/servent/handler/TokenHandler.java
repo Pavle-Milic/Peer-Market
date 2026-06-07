@@ -32,6 +32,8 @@ public class TokenHandler implements MessageHandler {
         if (AppConfig.chordState.isKeyMine(clientMessage.getTargetId())) {
             AppConfig.chordState.setToken(true);
 
+            AppConfig.timestampedStandardPrint("[MUTEX-ACQUIRED]");
+
             GrindingRoom.workWorkWorkWorkWorkWork();
 
             while (GrindingRoom.isWorking()) {
@@ -67,6 +69,9 @@ public class TokenHandler implements MessageHandler {
 
             if (!red.isEmpty()) {
                 AppConfig.chordState.setToken(false);
+
+                AppConfig.timestampedStandardPrint("[MUTEX-RELEASED]");
+
                 int nextNodeId = red.remove(0);
                 ServentInfo nextNode = AppConfig.chordState.getNextNodeForKey(nextNodeId);
                 String strMap = Stringifyer.stringifyMap(mapaTokena);

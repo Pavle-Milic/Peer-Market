@@ -1,25 +1,15 @@
-03:14:43 - Bootstrap server started
-03:14:43 - Bootstrap server started on port: 2000
-03:14:43 - Bootstrap cli started
-03:14:45 - Prihvatio poruku od servanta
+12:26:42 - Bootstrap server started
+12:26:42 - Bootstrap server started on port: 2000
+12:26:42 - Bootstrap cli started
+12:26:44 - Prihvatio poruku od servanta
 got 1280
-03:14:55 - Prihvatio poruku od servanta
+12:26:54 - Prihvatio poruku od servanta
 got 1290
-03:14:57 - Prihvatio poruku od servanta
+12:26:56 - Prihvatio poruku od servanta
 adding 1290
-03:15:05 - Prihvatio poruku od servanta
+12:27:04 - Prihvatio poruku od servanta
 got 1300
-03:15:07 - Prihvatio poruku od servanta
+12:27:07 - Prihvatio poruku od servanta
 adding 1300
-03:15:16 - Prihvatio poruku od servanta
+12:27:14 - Prihvatio poruku od servanta
 got 1310
-03:15:17 - Prihvatio poruku od servanta
-adding 1310
-03:15:25 - Prihvatio poruku od servanta
-got 1320
-03:15:30 - Prihvatio poruku od servanta
-adding 1320
-03:15:36 - Prihvatio poruku od servanta
-got 1330
-03:15:40 - Prihvatio poruku od servanta
-adding 1330

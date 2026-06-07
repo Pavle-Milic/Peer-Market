@@ -20,21 +20,23 @@ public class TellGetHandler implements MessageHandler {
 		if (clientMessage.getMessageType() == MessageType.TELL_GET) {
 			String parts[] = clientMessage.getMessageText().split(":");
 			
-			if (parts.length == 3) {
+			if (parts.length == 4) {
 				try {
 					int key = Integer.parseInt(parts[0]);
 					int originalSednerId= Integer.parseInt(parts[1]);
 					int value = Integer.parseInt(parts[2]);
+					int ownerId = Integer.parseInt(parts[3]);
 					if(AppConfig.chordState.isKeyMine(originalSednerId)){
 						if (value == -1) {
 							AppConfig.timestampedStandardPrint("No such key: " + key);
 						} else {
-							AppConfig.timestampedStandardPrint("Search je nasao stanje "+ value+ " na kljucu " + key);
+							AppConfig.timestampedErrorPrint("[MARKET-SEARCH-RESULT] item_id:"+ key +" qty:" + value);
+							AppConfig.timestampedStandardPrint("Search je nasao stanje "+ value+ " na kljucu " + key + " owner_id:" +ownerId);
 						}
 					}
 					else{
 						ServentInfo next = AppConfig.chordState.getNextNodeForKey(originalSednerId);
-						Message m = new TellGetMessage(AppConfig.myServentInfo.getListenerPort(), next.getListenerPort(), key,originalSednerId, value);
+						Message m = new TellGetMessage(AppConfig.myServentInfo.getListenerPort(), next.getListenerPort(), key,originalSednerId, value, ownerId);
 						MessageUtil.sendMessage(m);
 					}
 

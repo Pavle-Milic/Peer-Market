@@ -1,5 +1,5 @@
-givetoken
 pause 10000
+givetoken
 buy auto 10
 info
 print_values

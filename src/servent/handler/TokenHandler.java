@@ -42,7 +42,6 @@ public class TokenHandler implements MessageHandler {
                 }
             }
 
-
             int myId = AppConfig.myServentInfo.getChordId();
 
             int myCurrentRequestNum = AppConfig.chordState.getNumOfTokenRequests().getOrDefault(myId, 0);
@@ -69,24 +68,15 @@ public class TokenHandler implements MessageHandler {
             if (!red.isEmpty()) {
                 AppConfig.chordState.setToken(false);
                 int nextNodeId = red.remove(0);
-
                 ServentInfo nextNode = AppConfig.chordState.getNextNodeForKey(nextNodeId);
-
                 String strMap = Stringifyer.stringifyMap(mapaTokena);
                 String strList = Stringifyer.stringifyList(red);
-
                 Message msg = new TokenMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), strMap, strList, nextNodeId);
                 MessageUtil.sendMessage(msg);
             }
         } else {
             ServentInfo nextNode = AppConfig.chordState.getNextNodeForKey(clientMessage.getTargetId());
-            Message msg = new TokenMessage(
-                    AppConfig.myServentInfo.getListenerPort(),
-                    nextNode.getListenerPort(),
-                    clientMessage.getMapa(),
-                    clientMessage.getList(),
-                    clientMessage.getTargetId()
-            );
+            Message msg = new TokenMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), clientMessage.getMapa(), clientMessage.getList(), clientMessage.getTargetId());
             MessageUtil.sendMessage(msg);
         }
     }

@@ -42,9 +42,11 @@ public class DeadNodeHandler implements MessageHandler {
             return;
         }
 
-        if (AppConfig.chordState.hasSeenDeadNodeMessage(deadNodeId, messageId)) {
-            AppConfig.timestampedStandardPrint("Vec vidjena DeadNode poruka za node " + deadNodeId + ", ignorisem.");
-            return;
+        synchronized (AppConfig.chordState) {
+            if (AppConfig.chordState.hasSeenDeadNodeMessage(deadNodeId, messageId)) {
+                AppConfig.timestampedStandardPrint("Vec vidjena DeadNode poruka za node " + deadNodeId + ", ignorisem.");
+                return;
+            }
         }
         Pinger.removeNode(deadNodeId);
 

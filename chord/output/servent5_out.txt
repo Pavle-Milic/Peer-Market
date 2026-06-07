@@ -1,14 +1,26 @@
-17:58:55 - Starting servent [44|localhost|1500|3000|7000]
-17:58:55 - Starting listener
-17:58:55 - Starting pinger
-17:58:55 - Starting cli
-17:58:55 - Starting initializer
-17:58:55 - Initializer started
-17:58:55 - Initializer entered run
-17:58:55 - Connecting to bootstrap 2000
-17:58:55 - Pausing for 200000 ms
-17:58:55 - Connected to bootstrap
-17:58:55 - Sending Hail
-17:58:55 - Waiting for response
-17:58:55 - Bootstrap returned port: 1000
-17:58:55 - Sending message [44|1500|0||NEW_NODE|1000|8]
+02:48:46 - Starting servent [44|localhost|1500|3000|7000]
+02:48:46 - Starting listener
+02:48:46 - Starting pinger
+02:48:46 - Starting cli
+02:48:46 - Starting initializer
+02:48:46 - Initializer started
+02:48:46 - Initializer entered run
+02:48:46 - Connecting to bootstrap 2000
+02:48:46 - Pausing for 20000 ms
+02:48:46 - Connected to bootstrap
+02:48:46 - Sending Hail
+02:48:46 - Waiting for response
+02:48:46 - Bootstrap returned port: 1200
+02:48:46 - Sending message [44|1500|0||NEW_NODE|1200|48]
+02:48:48 - Got message [48|1200|24||WELCOME|1500|44]
+02:48:48 - Got message [48|1200|29||TOKENREQUEST|1500|44]
+02:48:48 - Sending message [44|1500|1||UPDATE|1200|48]
+02:48:49 - Sending message [44|1500|2||TOKENREQUEST|1200|48]
+02:48:50 - Got message [48|1200|38||TOKENREQUEST|1500|44]
+02:48:51 - Sending message [44|1500|3||TOKENREQUEST|1200|48]
+02:48:51 - Got message [44|1500|41|1200,1300,1000,1400,1100|UPDATE|1500|44]
+02:48:57 - Got message [24|1400|25|51:24|ASK_GET|1500|44]
+02:48:57 - Sending message [44|1500|12|51:24|ASK_GET|1200|48]
+02:48:58 - Got message [28|1100|51|0:24|ASK_GET|1500|44]
+02:48:59 - Sending message [44|1500|14|0:24|ASK_GET|1200|48]
+02:49:06 - Stopping...

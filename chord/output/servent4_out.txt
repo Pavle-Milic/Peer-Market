@@ -1,25 +1,73 @@
-17:58:55 - Starting servent [24|localhost|1400|4000|10000]
-17:58:55 - Starting listener
-17:58:55 - Starting pinger
-17:58:55 - Starting cli
-17:58:55 - Starting initializer
-17:58:55 - Initializer started
-17:58:55 - Initializer entered run
-17:58:55 - Connecting to bootstrap 2000
-17:58:55 - Pausing for 20000 ms
-17:58:55 - Connected to bootstrap
-17:58:55 - Sending Hail
-17:58:55 - Waiting for response
-17:58:55 - Bootstrap returned port: 1000
-17:58:55 - Sending message [24|1400|0||NEW_NODE|1000|8]
-18:05:31 - No such key: 51
-18:05:31 - No such key: 0
-18:05:31 - Pausing for 10000 ms
-18:05:41 - My info: [24|localhost|1400|4000|10000]
-18:05:41 - Value map je prazna.
-18:05:41 - Pausing for 10000 ms
-18:05:51 - No such key: 51
-18:05:51 - No such key: 0
-18:05:51 - Pausing for 10000 ms
-18:06:01 - My info: [24|localhost|1400|4000|10000]
-18:06:01 - Value map je prazna.
+02:48:36 - Starting servent [24|localhost|1400|4000|10000]
+02:48:36 - Starting listener
+02:48:36 - Starting pinger
+02:48:36 - Starting cli
+02:48:36 - Starting initializer
+02:48:36 - Initializer started
+02:48:36 - Initializer entered run
+02:48:36 - Connecting to bootstrap 2000
+02:48:36 - Pausing for 20000 ms
+02:48:36 - Connected to bootstrap
+02:48:36 - Sending Hail
+02:48:36 - Waiting for response
+02:48:36 - Bootstrap returned port: 1200
+02:48:37 - Sending message [24|1400|0||NEW_NODE|1200|48]
+02:48:41 - Got message [28|1100|18||WELCOME|1400|24]
+02:48:42 - Sending message [24|1400|1||UPDATE|1100|28]
+02:48:45 - Got message [24|1400|28|1100,1200,1300,1000|UPDATE|1400|24]
+02:48:46 - Got message [4|1300|16||TOKENREQUEST|1400|24]
+02:48:47 - Sending message [24|1400|3||TOKENREQUEST|1100|28]
+02:48:47 - Got message [4|1300|14|48:4|SUBSCRIBE|1400|24]
+02:48:47 - Got message [8|1000|34||TOKEN|1400|24]
+02:48:47 - Sending message [24|1400|4||TOKENREQUEST|1200|48]
+02:48:48 - Sending message [24|1400|5||TOKENREQUEST|1300|4]
+02:48:48 - Sending message [24|1400|6||TOKENREQUEST|1000|8]
+02:48:48 - Got message [28|1100|30||TOKENREQUEST|1400|24]
+02:48:48 - Sending message [24|1400|7|48:4|SUBSCRIBE|1100|28]
+02:48:48 - Got message [48|1200|28||TOKENREQUEST|1400|24]
+02:48:48 - Got message [8|1000|31||TOKENREQUEST|1400|24]
+02:48:48 - Sending message [24|1400|8||TOKEN|1100|28]
+02:48:49 - Got message [4|1300|20||TOKENREQUEST|1400|24]
+02:48:50 - Sending message [24|1400|12||TOKENREQUEST|1200|48]
+02:48:50 - Got message [8|1000|40||TOKENREQUEST|1400|24]
+02:48:50 - Got message [44|1500|43|1200,1300,1000|UPDATE|1400|24]
+02:48:50 - Sending message [24|1400|13||TOKENREQUEST|1300|4]
+02:48:50 - Sending message [24|1400|14||TOKENREQUEST|1000|8]
+02:48:50 - Sending message [24|1400|11||TOKENREQUEST|1100|28]
+02:48:51 - Sending message [44|1500|16|1200,1300,1000,1400|UPDATE|1100|28]
+02:48:51 - Got message [48|1200|37||TOKENREQUEST|1400|24]
+02:48:51 - Got message [28|1100|39||TOKENREQUEST|1400|24]
+02:48:51 - Got message [4|1300|30|28:51:20|CONFIRMPUT|1400|24]
+02:48:53 - Sending message [24|1400|19|28:51:20|CONFIRMPUT|1100|28]
+02:48:56 - Please wait...
+02:48:56 - Please wait...
+02:48:56 - Pausing for 10000 ms
+02:48:57 - Sending message [24|1400|25|51:24|ASK_GET|1500|44]
+02:48:57 - Sending message [24|1400|26|0:24|ASK_GET|1100|28]
+02:48:59 - Got message [8|1000|55|51:24:20|TELL_GET|1400|24]
+02:48:59 - Search je nasao stanje 20 na kljucu 51
+02:49:03 - Got message [8|1000|60|0:24:5|TELL_GET|1400|24]
+02:49:03 - Search je nasao stanje 5 na kljucu 0
+02:49:06 - My info: [24|localhost|1400|4000|10000]
+02:49:06 - Value map je prazna.
+02:49:06 - Pausing for 10000 ms
+02:49:16 - Please wait...
+02:49:16 - Please wait...
+02:49:16 - Pausing for 10000 ms
+02:49:16 - Sending message [24|1400|51|1500|ASKPING|1000|8]
+02:49:17 - Sending message [24|1400|53|0:24|ASK_GET|1100|28]
+02:49:17 - Sending message [24|1400|52|51:24|ASK_GET|1500|44]
+02:49:17 - Got message [8|1000|1193888104||DEADNODE|1400|24]
+02:49:17 - Cvor 44 uklonjen iz chorda
+02:49:18 - Sending message [24|1400|1193888104||DEADNODE|1300|4]
+02:49:19 - Sending message [24|1400|1193888104||DEADNODE|1100|28]
+02:49:19 - Sending message [24|1400|1193888104||DEADNODE|1000|8]
+02:49:19 - Got message [4|1300|1193888104||DEADNODE|1400|24]
+02:49:19 - Vec vidjena DeadNode poruka za node 44, ignorisem.
+02:49:19 - Sending message [24|1400|1193888104||DEADNODE|1500|44]
+02:49:19 - Got message [28|1100|1193888104||DEADNODE|1400|24]
+02:49:19 - Vec vidjena DeadNode poruka za node 44, ignorisem.
+02:49:19 - Got message [48|1200|1193888104||DEADNODE|1400|24]
+02:49:19 - Vec vidjena DeadNode poruka za node 44, ignorisem.
+02:49:26 - My info: [24|localhost|1400|4000|10000]
+02:49:26 - Value map je prazna.

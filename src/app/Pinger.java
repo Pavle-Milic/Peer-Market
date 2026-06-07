@@ -96,6 +96,11 @@ public class Pinger implements Runnable,Cancellable{
                 mapa.remove(s.getListenerPort());
             }
         }
+
+        ServentInfo pred = AppConfig.chordState.getPredecessor();
+        if (pred != null && pred.getChordId() == deadNodeId) {
+            mapa.remove(pred.getListenerPort());
+        }
     }
 
 }

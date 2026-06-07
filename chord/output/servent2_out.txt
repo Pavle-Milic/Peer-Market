@@ -1,15 +1,67 @@
-17:58:54 - Starting servent [48|localhost|1200|4000|10000]
-17:58:55 - Starting listener
-17:58:55 - Starting pinger
-17:58:55 - Starting cli
-17:58:55 - Starting initializer
-17:58:55 - Initializer started
-17:58:55 - Initializer entered run
-17:58:55 - Connecting to bootstrap 2000
-17:58:55 - My info: [48|localhost|1200|4000|10000]
-17:58:55 - Value map je prazna.
-17:58:55 - Connected to bootstrap
-17:58:55 - Sending Hail
-17:58:55 - Waiting for response
-17:58:55 - Bootstrap returned port: 1000
-17:58:55 - Sending message [48|1200|0||NEW_NODE|1000|8]
+02:48:16 - Starting servent [48|localhost|1200|4000|10000]
+02:48:16 - Starting listener
+02:48:16 - Starting pinger
+02:48:16 - Starting cli
+02:48:16 - Starting initializer
+02:48:16 - Initializer started
+02:48:16 - Initializer entered run
+02:48:16 - Connecting to bootstrap 2000
+02:48:16 - Pausing for 20000 ms
+02:48:16 - Connected to bootstrap
+02:48:16 - Sending Hail
+02:48:16 - Waiting for response
+02:48:16 - Bootstrap returned port: 1000
+02:48:17 - Sending message [48|1200|0||NEW_NODE|1000|8]
+02:48:18 - Got message [8|1000|5||WELCOME|1200|48]
+02:48:19 - Sending message [48|1200|1||UPDATE|1000|8]
+02:48:21 - Got message [48|1200|5|1000,1100|UPDATE|1200|48]
+02:48:27 - Got message [4|1300|0||NEW_NODE|1200|48]
+02:48:28 - Sending message [4|1300|5||NEW_NODE|1000|8]
+02:48:33 - Got message [4|1300|12|1000,1100|UPDATE|1200|48]
+02:48:34 - Sending message [4|1300|10|1000,1100,1200|UPDATE|1300|4]
+02:48:36 - My info: [48|localhost|1200|4000|10000]
+02:48:36 - Value map je prazna.
+02:48:37 - Got message [24|1400|0||NEW_NODE|1200|48]
+02:48:37 - Sending message [24|1400|14||NEW_NODE|1300|4]
+02:48:43 - Got message [24|1400|21|1100|UPDATE|1200|48]
+02:48:43 - Sending message [24|1400|21|1100,1200|UPDATE|1300|4]
+02:48:46 - Got message [44|1500|0||NEW_NODE|1200|48]
+02:48:47 - Got message [28|1100|25|51:20:28|PUT|1200|48]
+02:48:47 - Got message [4|1300|17||TOKENREQUEST|1200|48]
+02:48:47 - Got message [24|1400|4||TOKENREQUEST|1200|48]
+02:48:48 - Sending message [48|1200|24||WELCOME|1500|44]
+02:48:48 - Sending message [48|1200|27||TOKENREQUEST|1300|4]
+02:48:48 - Sending message [48|1200|28||TOKENREQUEST|1400|24]
+02:48:48 - Sending message [48|1200|26|51:20:28|PUT|1300|4]
+02:48:48 - Sending message [48|1200|29||TOKENREQUEST|1500|44]
+02:48:48 - Got message [8|1000|32||TOKENREQUEST|1200|48]
+02:48:48 - Got message [28|1100|28||TOKENREQUEST|1200|48]
+02:48:48 - Got message [44|1500|1||UPDATE|1200|48]
+02:48:49 - Got message [44|1500|2||TOKENREQUEST|1200|48]
+02:48:49 - Sending message [44|1500|33|1200|UPDATE|1300|4]
+02:48:49 - Got message [28|1100|32|48:4|SUBSCRIBE|1200|48]
+02:48:49 - Got message [28|1100|33||TOKEN|1200|48]
+02:48:50 - Got message [4|1300|21||TOKENREQUEST|1200|48]
+02:48:50 - Got message [8|1000|41||TOKENREQUEST|1200|48]
+02:48:50 - Sending message [48|1200|34|Uspesno ste se subscribe-ovali na node 48|NOTIFYSUBSCRIBERS|1300|4]
+02:48:50 - Got message [24|1400|12||TOKENREQUEST|1200|48]
+02:48:50 - Sending message [48|1200|38||TOKENREQUEST|1500|44]
+02:48:50 - Sending message [48|1200|35||TOKEN|1300|4]
+02:48:51 - Sending message [48|1200|36||TOKENREQUEST|1300|4]
+02:48:51 - Got message [28|1100|37||TOKENREQUEST|1200|48]
+02:48:51 - Sending message [48|1200|37||TOKENREQUEST|1400|24]
+02:48:51 - Got message [44|1500|3||TOKENREQUEST|1200|48]
+02:48:57 - Got message [44|1500|12|51:24|ASK_GET|1200|48]
+02:48:58 - Sending message [48|1200|49|51:24|ASK_GET|1300|4]
+02:48:59 - Got message [44|1500|14|0:24|ASK_GET|1200|48]
+02:49:00 - Sending message [48|1200|54|0:24|ASK_GET|1300|4]
+02:49:11 - Got message [8|1000|71|1500|ASKPING|1200|48]
+02:49:12 - Sending message [48|1200|74|1000|ASKPONG|1500|44]
+02:49:13 - Got message [4|1300|64|1500|ASKPING|1200|48]
+02:49:15 - Sending message [48|1200|75|1300|ASKPONG|1500|44]
+02:49:16 - Sending message [48|1200|78|1500|ASKPING|1100|28]
+02:49:19 - Got message [4|1300|1193888104||DEADNODE|1200|48]
+02:49:19 - Cvor 44 uklonjen iz chorda
+02:49:19 - Sending message [48|1200|1193888104||DEADNODE|1300|4]
+02:49:19 - Sending message [48|1200|1193888104||DEADNODE|1400|24]
+02:49:20 - Sending message [48|1200|1193888104||DEADNODE|1500|44]

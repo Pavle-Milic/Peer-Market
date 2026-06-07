@@ -1,3 +1,7 @@
+02:49:08 - Couldn't send message: [24|1400|42||PONG|1500|44]
+02:49:12 - Couldn't send message: [24|1400|46||PING|1500|44]
+02:49:17 - Couldn't send message: [24|1400|52|51:24|ASK_GET|1500|44]
+02:49:19 - Couldn't send message: [24|1400|1193888104||DEADNODE|1500|44]
 Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
 	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
 	at cli.CLIParser.run(CLIParser.java:59)

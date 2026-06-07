@@ -371,7 +371,7 @@ public class ChordState {
 	}
 
 	public void handleKeyBackup(int key, Pair pair) {
-		GrindingRoom.work(new PutJob(key, pair.value(), pair.nodeId()));
+		valueMap.put(key, pair);
 	}
 
 	/**
@@ -379,13 +379,44 @@ public class ChordState {
 	 */
 	public void putValue(int key, int value,int originalSenderId) {
 
-		if(!hasToken){
-			GrindingRoom.addToJobQueue(new BuyJob(key, value, originalSenderId));
-			requestToken();
-		} else {
-			if(tokenMap.equals(numOfTokenRequests)){
-				GrindingRoom.work(new BuyJob(key, value, originalSenderId));
+		if (isKeyMine(key)) {
+			if (!valueMap.containsKey(key) && value >0) {
+				ChordState.Pair noviPair = new Pair(originalSenderId, value);
+				if(!hasToken){
+					GrindingRoom.addToJobQueue(new PutJob(key, noviPair));
+					requestToken();
+				} else {
+					GrindingRoom.work(new PutJob(key, noviPair));
+				}
+			} else {
+				ChordState.Pair currentPair = valueMap.get(key);
+				if (currentPair.value() == 0 && value >0) {
+					Pair noviPair = new Pair(originalSenderId, value);
+					if(!hasToken){
+						GrindingRoom.addToJobQueue(new PutJob(key, noviPair));
+						requestToken();
+					} else {
+						GrindingRoom.work(new PutJob(key, noviPair));
+					}
+				} else if (currentPair.nodeId() == originalSenderId && currentPair.value() + value>=0) {
+					Pair noviPair = new Pair(originalSenderId, currentPair.value() + value);
+					if(!hasToken){
+						GrindingRoom.addToJobQueue(new PutJob(key, noviPair));
+						requestToken();
+					} else {
+						GrindingRoom.work(new PutJob(key, noviPair));
+					}
+				} else {
+					AppConfig.timestampedErrorPrint("Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju");
+					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
+					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId,"Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju" );
+					MessageUtil.sendMessage(mes);
+				}
 			}
+		} else {
+			ServentInfo nextNode = getNextNodeForKey(key);
+			PutMessage pm = new PutMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, value,originalSenderId);
+			MessageUtil.sendMessage(pm);
 		}
 	}
 
@@ -394,13 +425,33 @@ public class ChordState {
 	 */
 	public void buyValue(int key, int amount, int originalSenderId) {
 
-		if(!hasToken){
-			GrindingRoom.addToJobQueue(new BuyJob(key, amount, originalSenderId));
-			requestToken();
-		} else {
-			if(tokenMap.equals(numOfTokenRequests)){
-				GrindingRoom.work(new BuyJob(key, amount, originalSenderId));
+		if (isKeyMine(key)) {
+			if (valueMap.containsKey(key)) {
+				Pair currentPair = valueMap.get(key);
+
+				if (currentPair.value() >= amount) {
+					Pair noviPair = new Pair(currentPair.nodeId(), currentPair.value() - amount);
+
+					if(!hasToken){
+						GrindingRoom.addToJobQueue(new BuyJob(key, noviPair, originalSenderId, amount));
+						requestToken();
+					} else {
+						GrindingRoom.work(new BuyJob(key, noviPair, originalSenderId, amount));
+					}
+				} else {
+					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
+					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, pokusali ste da kupite vise nego sto ima na stanju");
+					MessageUtil.sendMessage(mes);
+				}
+			} else {
+				ServentInfo nextNode = getNextNodeForKey(originalSenderId);
+				Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem");
+				MessageUtil.sendMessage(mes);
 			}
+		} else {
+			ServentInfo nextNode = getNextNodeForKey(key);
+			Message bm = new BuyMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, amount, originalSenderId);
+			MessageUtil.sendMessage(bm);
 		}
 	}
 

@@ -1,6 +1,6 @@
-18:05:30 - Unknown command: 
-18:05:30 - Unknown command: 
 Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
 	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
 	at cli.CLIParser.run(CLIParser.java:59)
 	at java.base/java.lang.Thread.run(Thread.java:831)
+02:49:10 - Couldn't send message: [4|1300|57||PING|1500|44]
+02:49:19 - Couldn't send message: [4|1300|1193888104||DEADNODE|1500|44]

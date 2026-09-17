@@ -2,7 +2,6 @@ Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
 	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
 	at cli.CLIParser.run(CLIParser.java:59)
 	at java.base/java.lang.Thread.run(Thread.java:831)
-12:38:33 - Couldn't send message: [34|1290|63||PING|1330|42]
-12:38:35 - Couldn't send message: [34|1290|66|1320|ASKPONG|1330|42]
-12:38:41 - Couldn't send message: [34|1290|670043760||DEADNODE|1330|42]
-12:38:42 - Couldn't send message: [34|1290|79|1310|ASKPONG|1330|42]
+13:55:52 - Couldn't send message: [34|1290|68||PING|1330|42]
+13:55:52 - Couldn't send message: [34|1290|69|1320|ASKPONG|1330|42]
+13:55:58 - Couldn't send message: [34|1290|265221970||DEADNODE|1330|42]

@@ -1,6 +1,9 @@
-12:38:34 - Couldn't send message: [0|1280|66||PING|1330|42]
-12:38:38 - Couldn't send message: [0|1280|71|1290|ASKPONG|1330|42]
-12:38:42 - Couldn't send message: [0|1280|670043760||DEADNODE|1330|42]
+13:55:47 - Couldn't send message: [0|1280|61||PING|1330|42]
+13:55:47 - Couldn't send message: [0|1280|62||PONG|1330|42]
+13:55:51 - Couldn't send message: [0|1280|68||PING|1330|42]
+13:55:56 - Couldn't send message: [0|1280|75|1310|ASKPONG|1330|42]
+13:55:57 - Couldn't send message: [0|1280|76|1290|ASKPONG|1330|42]
+13:55:59 - Couldn't send message: [0|1280|265221970||DEADNODE|1330|42]
 Exception in thread "Thread-2" java.util.NoSuchElementException: No line found
 	at java.base/java.util.Scanner.nextLine(Scanner.java:1651)
 	at cli.CLIParser.run(CLIParser.java:59)

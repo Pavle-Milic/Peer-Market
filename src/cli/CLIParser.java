@@ -24,8 +24,6 @@ import servent.SimpleServentListener;
  * <li><code>print_causal</code> - prints all received causal broadcast messages</li>
  * <li><code>stop</code> - stops the servent and program finishes</li>
  * </ul>
- * 
- * @author bmilojkovic
  *
  */
 public class CLIParser implements Runnable, Cancellable {

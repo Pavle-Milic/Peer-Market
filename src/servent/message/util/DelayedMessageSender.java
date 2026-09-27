@@ -11,8 +11,7 @@ import servent.message.MessageType;
 /**
  * This worker sends a message asynchronously. Doing this in a separate thread
  * has the added benefit of being able to delay without blocking main or somesuch.
- * 
- * @author bmilojkovic
+ *
  *
  */
 public class DelayedMessageSender implements Runnable {

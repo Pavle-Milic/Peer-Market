@@ -29,6 +29,8 @@ public class SimpleServentListener implements Runnable, Cancellable {
 
 	/*
 	 * Thread pool for executing the handlers. Each client will get it's own handler thread.
+	 * WprkStealingPool je prakticno ForkJoinPool,  rekurzivni pool gde kada thread vise nema poslova na svom queue,
+	 *  on uzima posao sa kraja necijeg drugog queue-a
 	 */
 	private final ExecutorService threadPool = Executors.newWorkStealingPool();
 	

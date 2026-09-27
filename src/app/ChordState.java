@@ -34,7 +34,6 @@ import servent.message.util.MessageUtil;
  *   <li><code>putValue(int key, int value)</code> - stores the value locally or sends it on further in the system.</li>
  *   <li><code>getValue(int key)</code> - gets the value locally, or sends a message to get it from somewhere else.</li>
  * </ul>
- * @author bmilojkovic
  *
  */
 public class ChordState {

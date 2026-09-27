@@ -6,7 +6,6 @@ import servent.SimpleServentListener;
 /**
  * Describes the procedure for starting a single Servent
  *
- * @author bmilojkovic
  */
 public class ServentMain {
 

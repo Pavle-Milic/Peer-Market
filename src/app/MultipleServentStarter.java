@@ -20,8 +20,7 @@ import java.util.Scanner;
  * These files should contain the commands for each servent, as they would be entered in console.</li>
  * </ul>
  *
- * @author bmilojkovic
- */
+ * */
 public class MultipleServentStarter {
 
 	/**

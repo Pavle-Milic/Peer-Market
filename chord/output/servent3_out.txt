@@ -1,52 +1,72 @@
-13:55:07 - Starting servent [38|localhost|1310|4000|10000]
-13:55:07 - Starting listener
-13:55:07 - Starting pinger
-13:55:07 - Starting cli
-13:55:07 - Starting initializer
-13:55:07 - Initializer started
-13:55:07 - Initializer entered run
-13:55:07 - Connecting to bootstrap 2000
-13:55:07 - Pausing for 20000 ms
-13:55:07 - Connected to bootstrap
-13:55:07 - Sending Hail
-13:55:07 - Waiting for response
-13:55:07 - Bootstrap returned port: 1300
-13:55:07 - Sending message [38|1310|0||NEW_NODE|1300|4]
-13:55:10 - Got message [0|1280|11||WELCOME|1310|38]
-13:55:11 - Sending message [38|1310|1||UPDATE|1280|0]
-13:55:13 - Got message [38|1310|15|1280,1300,1290|UPDATE|1310|38]
-13:55:13 - [SYS-NEIGHBORS] my_id:38 neighbors:34,0
-13:55:22 - Got message [8|1320|23|1290|UPDATE|1310|38]
-13:55:22 - [SYS-NEIGHBORS] my_id:38 neighbors:34,0
-13:55:24 - Sending message [8|1320|8|1290,1310|UPDATE|1280|0]
-13:55:27 - My info: [38|localhost|1310|4000|10000]
-13:55:27 - Value map je prazna.
-13:55:28 - Got message [34|1290|30|51:20:34|PUT|1310|38]
-13:55:28 - Sending message [38|1310|15|0:5:38|PUT|1280|0]
-13:55:28 - Sending message [38|1310|14|48:38|SUBSCRIBE|1280|0]
-13:55:28 - Got message [42|1330|32||NEW_NODE|1310|38]
-13:55:29 - Sending message [38|1310|17|51:20:34|PUT|1280|0]
-13:55:30 - Sending message [42|1330|18||NEW_NODE|1280|0]
-13:55:31 - Got message [34|1290|37|38:0:5:38|CONFIRMPUT|1310|38]
-13:55:31 - Uspesno listirani proizvodi sa id-em 0
-13:55:31 - Got message [34|1290|38|Uspesno ste se subscribe-ovali na node 0|NOTIFYSUBSCRIBERS|1310|38]
-13:55:31 - Uspesno ste se subscribe-ovali na node 0
-13:55:36 - Got message [42|1330|47|1280,1300,1320,1290|UPDATE|1310|38]
-13:55:36 - [SYS-NEIGHBORS] my_id:38 neighbors:34,42
-13:55:37 - Sending message [42|1330|25|1280,1300,1320,1290,1310|UPDATE|1330|42]
-13:55:39 - Got message [34|1290|48|0:8|ASK_GET|1310|38]
-13:55:39 - Sending message [38|1310|28|0:8|ASK_GET|1330|42]
-13:55:54 - [SYS-WEAK-FAIL] node:42 port: 1330
-13:55:56 - Sending message [38|1310|47|1330|ASKPING|1280|0]
-13:55:58 - Got message [4|1300|265221970||DEADNODE|1310|38]
-13:55:58 - Cvor 42 uklonjen iz chorda
-13:55:58 - Got message [34|1290|83|0:8|ASK_GET|1310|38]
-13:55:58 - Got message [34|1290|265221970||DEADNODE|1310|38]
-13:55:58 - Vec vidjena DeadNode poruka za node 42, ignorisem.
-13:55:58 - Sending message [38|1310|265221970||DEADNODE|1290|34]
-13:55:59 - Got message [34|1290|82|51:8|ASK_GET|1310|38]
-13:55:59 - Sending message [38|1310|265221970||DEADNODE|1330|42]
-13:55:59 - Sending message [38|1310|265221970||DEADNODE|1280|0]
-13:55:59 - Sending message [38|1310|265221970||DEADNODE|1320|8]
-13:55:59 - Sending message [38|1310|54|0:8|ASK_GET|1280|0]
-13:56:00 - Sending message [38|1310|55|51:8|ASK_GET|1280|0]
+04:12:59 - Starting servent [38|localhost|1310|4000|10000]
+04:12:59 - Starting listener
+04:12:59 - Starting pinger
+04:12:59 - Starting cli
+04:12:59 - Starting initializer
+04:12:59 - Initializer started
+04:12:59 - Initializer entered run
+04:12:59 - Connecting to bootstrap 2000
+04:12:59 - Pausing for 20000 ms
+04:12:59 - Connected to bootstrap
+04:12:59 - Sending Hail
+04:12:59 - Waiting for response
+04:12:59 - Bootstrap returned port: 1280
+04:13:00 - Sending message [38|1310|0||NEW_NODE|1280|0]
+04:13:01 - Got message [0|1280|9||WELCOME|1310|38]
+04:13:02 - Sending message [38|1310|1||UPDATE|1280|0]
+04:13:05 - Got message [38|1310|13|1280,1300,1290|UPDATE|1310|38]
+04:13:05 - [SYS-NEIGHBORS] my_id:38 neighbors:34,0
+04:13:15 - Got message [8|1320|21|1290|UPDATE|1310|38]
+04:13:15 - [SYS-NEIGHBORS] my_id:38 neighbors:34,0
+04:13:16 - Sending message [8|1320|8|1290,1310|UPDATE|1280|0]
+04:13:19 - My info: [38|localhost|1310|4000|10000]
+04:13:19 - Value map je prazna.
+04:13:20 - Sending message [38|1310|15|48:38|SUBSCRIBE|1280|0]
+04:13:20 - Got message [34|1290|29|51:20:34|PUT|1310|38]
+04:13:21 - Sending message [38|1310|16|0:5:38|PUT|1280|0]
+04:13:21 - Sending message [38|1310|17|51:20:34|PUT|1280|0]
+04:13:23 - Got message [34|1290|34|Uspesno ste se subscribe-ovali na node 0|NOTIFYSUBSCRIBERS|1310|38]
+04:13:23 - Uspesno ste se subscribe-ovali na node 0
+04:13:23 - Got message [42|1330|35||NEW_NODE|1310|38]
+04:13:24 - Got message [34|1290|38|38:0:5:38|CONFIRMPUT|1310|38]
+04:13:24 - Uspesno listirani proizvodi sa id-em 0
+04:13:24 - Sending message [42|1330|21||NEW_NODE|1280|0]
+04:13:31 - Got message [42|1330|46|1280,1300,1320,1290|UPDATE|1310|38]
+04:13:31 - [SYS-NEIGHBORS] my_id:38 neighbors:34,42
+04:13:31 - Got message [34|1290|48|0:8|ASK_GET|1310|38]
+04:13:32 - Sending message [38|1310|31|0:8|ASK_GET|1330|42]
+04:13:32 - Sending message [42|1330|29|1280,1300,1320,1290,1310|UPDATE|1330|42]
+04:13:46 - Got message [0|1280|68|1330|ASKPING|1310|38]
+04:13:46 - [SYS-WEAK-FAIL] node:42 port: 1330
+04:13:46 - Sending message [38|1310|51|1330|ASKPING|1320|8]
+04:13:47 - Sending message [38|1310|48|1280|ASKPONG|1330|42]
+04:13:47 - Got message [34|1290|75|1330|ASKPING|1310|38]
+04:13:49 - Sending message [38|1310|52|1290|ASKPONG|1330|42]
+04:13:52 - [SYS-STRONG-FAIL] node:42 port: 1330
+04:13:52 - Cvor 42 uklonjen iz chorda
+04:13:52 - Got message [34|1290|78|0:8|ASK_GET|1310|38]
+04:13:52 - Got message [34|1290|-708809328||DEADNODE|1310|38]
+04:13:52 - Cvor 42 uklonjen iz chorda
+04:13:52 - Sending message [38|1310|-1951403987||DEADNODE|1290|34]
+04:13:53 - Sending message [38|1310|-1951403987||DEADNODE|1280|0]
+04:13:53 - Got message [4|1300|-708809328||DEADNODE|1310|38]
+04:13:53 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+04:13:53 - Sending message [38|1310|-1951403987||DEADNODE|1330|42]
+04:13:53 - Sending message [38|1310|60|0:8|ASK_GET|1280|0]
+04:13:53 - Sending message [38|1310|-1951403987||DEADNODE|1320|8]
+04:13:53 - Sending message [38|1310|-708809328||DEADNODE|1290|34]
+04:13:53 - Got message [34|1290|-979384576||DEADNODE|1310|38]
+04:13:53 - Cvor 42 uklonjen iz chorda
+04:13:53 - Sending message [38|1310|-708809328||DEADNODE|1280|0]
+04:13:53 - Sending message [38|1310|-708809328||DEADNODE|1320|8]
+04:13:53 - Got message [4|1300|-979384576||DEADNODE|1310|38]
+04:13:53 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+04:13:54 - Sending message [38|1310|-979384576||DEADNODE|1320|8]
+04:13:54 - Got message [34|1290|-1951403987||DEADNODE|1310|38]
+04:13:54 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+04:13:54 - Got message [0|1280|-1951403987||DEADNODE|1310|38]
+04:13:54 - Vec vidjena DeadNode poruka za node 42, ignorisem.
+04:13:54 - Sending message [38|1310|-979384576||DEADNODE|1280|0]
+04:13:54 - Sending message [38|1310|-979384576||DEADNODE|1290|34]
+04:13:55 - Got message [4|1300|-1951403987||DEADNODE|1310|38]
+04:13:55 - Vec vidjena DeadNode poruka za node 42, ignorisem.

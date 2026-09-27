@@ -3,7 +3,6 @@ package app;
 /**
  * Describes a cancellable job. Our workers will normally implement
  * this one aside from {@link Runnable}.
- * @author pengu
  *
  */
 public interface Cancellable {

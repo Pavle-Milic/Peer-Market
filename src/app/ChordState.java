@@ -44,15 +44,15 @@ public class ChordState {
 	public static int chordHash(int value) {
 		return 61 * value % CHORD_SIZE;
 	}
-	
+
 	private int chordLevel; //log_2(CHORD_SIZE)
-	
+
 	private ServentInfo[] successorTable;
 	private ServentInfo predecessorInfo;
-	
+
 	//we DO NOT use this to send messages, but only to construct the successor table
 	private List<ServentInfo> allNodeInfo;
-	
+
 	private Map<Integer, Pair> valueMap;
 
 	private Queue<Pair> seenDeadNodeMessages = new ConcurrentLinkedQueue<>();
@@ -62,7 +62,7 @@ public class ChordState {
 	private Map<Integer, Integer> tokenMap = new ConcurrentHashMap<>();
 
 	private volatile boolean hasToken = false;
-	
+
 	public ChordState() {
 		this.chordLevel = 1;
 		int tmp = CHORD_SIZE;
@@ -73,17 +73,17 @@ public class ChordState {
 			tmp /= 2;
 			this.chordLevel++;
 		}
-		
+
 		successorTable = new ServentInfo[chordLevel];
 		for (int i = 0; i < chordLevel; i++) {
 			successorTable[i] = null;
 		}
-		
+
 		predecessorInfo = null;
 		valueMap = new ConcurrentHashMap<>();
 		allNodeInfo = new ArrayList<>();
 	}
-	
+
 	/**
 	 * This should be called once after we get <code>WELCOME</code> message.
 	 * It sets up our initial value map and our first successor so we can send <code>UPDATE</code>.
@@ -94,14 +94,14 @@ public class ChordState {
 		successorTable[0] = new ServentInfo("localhost", welcomeMsg.getSenderPort());
 		this.valueMap = new ConcurrentHashMap<>(welcomeMsg.getValues());
 		Pinger.addNode(welcomeMsg.getSenderPort());
-		
+
 		//tell bootstrap this node is not a collider
 		try {
 			Socket bsSocket = new Socket("localhost", AppConfig.BOOTSTRAP_PORT);
-			
+
 			PrintWriter bsWriter = new PrintWriter(bsSocket.getOutputStream());
 			bsWriter.write("New\n" + AppConfig.myServentInfo.getListenerPort() + "\n");
-			
+
 			bsWriter.flush();
 			bsSocket.close();
 		} catch (UnknownHostException e) {
@@ -110,23 +110,23 @@ public class ChordState {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int getChordLevel() {
 		return chordLevel;
 	}
-	
+
 	public ServentInfo[] getSuccessorTable() {
 		return successorTable;
 	}
-	
+
 	public int getNextNodePort() {
 		return successorTable[0].getListenerPort();
 	}
-	
+
 	public ServentInfo getPredecessor() {
 		return predecessorInfo;
 	}
-	
+
 	public void setPredecessor(ServentInfo newNodeInfo) {
 		this.predecessorInfo = newNodeInfo;
 	}
@@ -134,11 +134,11 @@ public class ChordState {
 	public Map<Integer, Pair> getValueMap() {
 		return valueMap;
 	}
-	
+
 	public void setValueMap(Map<Integer, Pair> valueMap) {
 		this.valueMap = valueMap;
 	}
-	
+
 	public boolean isCollision(int chordId) {
 		if (chordId == AppConfig.myServentInfo.getChordId()) {
 			return true;
@@ -150,7 +150,7 @@ public class ChordState {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Returns true if we are the owner of the specified key.
 	 */
@@ -158,10 +158,10 @@ public class ChordState {
 		if (predecessorInfo == null) {
 			return true;
 		}
-		
+
 		int predecessorChordId = predecessorInfo.getChordId();
 		int myChordId = AppConfig.myServentInfo.getChordId();
-		
+
 		if (predecessorChordId < myChordId) { //no overflow
 			if (key <= myChordId && key > predecessorChordId) {
 				return true;
@@ -171,10 +171,10 @@ public class ChordState {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * Main chord operation - find the nearest node to hop to to find a specific key.
 	 * We have to take a value that is smaller than required to make sure we don't overshoot.
@@ -184,10 +184,10 @@ public class ChordState {
 		if (isKeyMine(key)) {
 			return AppConfig.myServentInfo;
 		}
-		
+
 		//normally we start the search from our first successor
 		int startInd = 0;
-		
+
 		//if the key is smaller than us, and we are not the owner,
 		//then all nodes up to CHORD_SIZE will never be the owner,
 		//so we start the search from the first item in our table after CHORD_SIZE
@@ -199,17 +199,17 @@ public class ChordState {
 				skip++;
 			}
 		}
-		
+
 		int previousId = successorTable[startInd].getChordId();
-		
+
 		for (int i = startInd + 1; i < successorTable.length; i++) {
 			if (successorTable[i] == null) {
 				AppConfig.timestampedErrorPrint("Couldn't find successor for " + key);
 				break;
 			}
-			
+
 			int successorId = successorTable[i].getChordId();
-			
+
 			if (successorId >= key) {
 				return successorTable[i-1];
 			}
@@ -225,23 +225,23 @@ public class ChordState {
 
 	private void updateSuccessorTable() {
 		//first node after me has to be successorTable[0]
-		
+
 		int currentNodeIndex = 0;
 		ServentInfo currentNode = allNodeInfo.get(currentNodeIndex);
 		successorTable[0] = currentNode;
-		
+
 		int currentIncrement = 2;
-		
+
 		ServentInfo previousNode = AppConfig.myServentInfo;
-		
+
 		//i is successorTable index
 		for(int i = 1; i < chordLevel; i++, currentIncrement *= 2) {
 			//we are looking for the node that has larger chordId than this
 			int currentValue = (AppConfig.myServentInfo.getChordId() + currentIncrement) % CHORD_SIZE;
-			
+
 			int currentId = currentNode.getChordId();
 			int previousId = previousNode.getChordId();
-			
+
 			//this loop needs to skip all nodes that have smaller chordId than currentValue
 			while (true) {
 				if (currentValue > currentId) {
@@ -273,29 +273,29 @@ public class ChordState {
 				}
 			}
 		}
-		
+
 	}
 
 	/**
 	 * This method constructs an ordered list of all nodes. They are ordered by chordId, starting from this node.
 	 * Once the list is created, we invoke <code>updateSuccessorTable()</code> to do the rest of the work.
-	 * 
+	 *
 	 */
 	public void addNodes(List<ServentInfo> newNodes) {
 		allNodeInfo.addAll(newNodes);
-		
+
 		allNodeInfo.sort(new Comparator<ServentInfo>() {
-			
+
 			@Override
 			public int compare(ServentInfo o1, ServentInfo o2) {
 				return o1.getChordId() - o2.getChordId();
 			}
-			
+
 		});
-		
+
 		List<ServentInfo> newList = new ArrayList<>();
 		List<ServentInfo> newList2 = new ArrayList<>();
-		
+
 		int myId = AppConfig.myServentInfo.getChordId();
 		for (ServentInfo serventInfo : allNodeInfo) {
 			if (serventInfo.getChordId() < myId) {
@@ -304,7 +304,7 @@ public class ChordState {
 				newList.add(serventInfo);
 			}
 		}
-		
+
 		allNodeInfo.clear();
 		allNodeInfo.addAll(newList);
 		allNodeInfo.addAll(newList2);
@@ -373,7 +373,7 @@ public class ChordState {
 	/**
 	 * Pomoćna metoda koja šalje izmenjeni par našem neposrednom sledbeniku
 	 */
-    public void backupToSuccessor(int key, Pair pair) {
+	public void backupToSuccessor(int key, Pair pair) {
 		if (successorTable[0] != null && successorTable[0].getListenerPort() != AppConfig.myServentInfo.getListenerPort()) {
 			Message rm = new BackupKeyMessage(AppConfig.myServentInfo.getListenerPort(), successorTable[0].getListenerPort(), key, pair.value(), pair.nodeId());
 			MessageUtil.sendMessage(rm);
@@ -385,90 +385,46 @@ public class ChordState {
 	}
 
 	/**
-	 * The Chord put operation. Stores locally if key is ours, otherwise sends it on.
+	 * The Chord put operation. If the key is ours, the request is handed to a PutJob,
+	 * which does all validation and the actual map update while holding the token.
+	 * Otherwise the request is forwarded.
 	 */
-	public void putValue(int key, int value,int originalSenderId) {
-
+	public void putValue(int key, int value, int originalSenderId) {
 		if (isKeyMine(key)) {
-			if (!valueMap.containsKey(key) && value >0) {
-				ChordState.Pair noviPair = new Pair(originalSenderId, value);
-				if(!hasToken){
-					GrindingRoom.addToJobQueue(new PutJob(key, noviPair));
-					AppConfig.timestampedStandardPrint("[MUTEX-REQUEST] item_id:" + key);
-					requestToken();
-				} else {
-					GrindingRoom.work(new PutJob(key, noviPair));
-				}
-			} else {
-				ChordState.Pair currentPair = valueMap.get(key);
-				if (currentPair.value() == 0 && value >0) {
-					Pair noviPair = new Pair(originalSenderId, value);
-					if(!hasToken){
-						GrindingRoom.addToJobQueue(new PutJob(key, noviPair));
-						AppConfig.timestampedStandardPrint("[MUTEX-REQUEST] item_id:" + key);
-						requestToken();
-					} else {
-						GrindingRoom.work(new PutJob(key, noviPair));
-					}
-				} else if (currentPair.nodeId() == originalSenderId && currentPair.value() + value>=0) {
-					Pair noviPair = new Pair(originalSenderId, currentPair.value() + value);
-					if(!hasToken){
-						GrindingRoom.addToJobQueue(new PutJob(key, noviPair));
-						AppConfig.timestampedStandardPrint("[MUTEX-REQUEST] item_id:" + key);
-						requestToken();
-					} else {
-						GrindingRoom.work(new PutJob(key, noviPair));
-					}
-				} else {
-					AppConfig.timestampedStandardPrint("[MARKET-PUT-FAIL] item_id:" + key + " reason:NOT_ENOUGH_STOCK_TO_REMOVE or reason:NOT_THE_OWNER");
-					AppConfig.timestampedErrorPrint("Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju");
-					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
-					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId,"Odbijen upis za kljuc " + key + ". Id " + originalSenderId + " nije vlasnik ili je probao da oduzme vise nego sto ima na stanju" );
-					MessageUtil.sendMessage(mes);
-				}
-			}
+			submitJob(new PutJob(key, value, originalSenderId), key);
 		} else {
 			ServentInfo nextNode = getNextNodeForKey(key);
-			PutMessage pm = new PutMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, value,originalSenderId);
+			PutMessage pm = new PutMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, value, originalSenderId);
 			MessageUtil.sendMessage(pm);
 		}
 	}
 
 	/**
-	 * The Chord buy operation. Processes locally if key is ours, otherwise sends it on.
+	 * The Chord buy operation. If the key is ours, the request is handed to a BuyJob,
+	 * which does all validation and the actual map update while holding the token.
+	 * Otherwise the request is forwarded.
 	 */
 	public void buyValue(int key, int amount, int originalSenderId) {
-
 		if (isKeyMine(key)) {
-			if (valueMap.containsKey(key)) {
-				Pair currentPair = valueMap.get(key);
-
-				if (currentPair.value() >= amount) {
-					Pair noviPair = new Pair(currentPair.nodeId(), currentPair.value() - amount);
-
-					if(!hasToken){
-						GrindingRoom.addToJobQueue(new BuyJob(key, noviPair, originalSenderId, amount));
-						AppConfig.timestampedStandardPrint("[MUTEX-REQUEST] item_id:" + key);
-						requestToken();
-					} else {
-						GrindingRoom.work(new BuyJob(key, noviPair, originalSenderId, amount));
-					}
-				} else {
-					AppConfig.timestampedStandardPrint("[MARKET-BUY-FAIL] item_id:" + key + " reason:OUT_OF_STOCK");
-					ServentInfo nextNode = getNextNodeForKey(originalSenderId);
-					Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, pokusali ste da kupite vise nego sto ima na stanju");
-					MessageUtil.sendMessage(mes);
-				}
-			} else {
-				AppConfig.timestampedStandardPrint("[MARKET-BUY-FAIL] item_id:" + key + " reason:NO_SUCH_KEY");
-				ServentInfo nextNode = getNextNodeForKey(originalSenderId);
-				Message mes = new InfoMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(), originalSenderId, "Kupovina je neuspesna, Ne postoji artikal sa tim imenom, tj pod tim klucem");
-				MessageUtil.sendMessage(mes);
-			}
+			submitJob(new BuyJob(key, amount, originalSenderId), key);
 		} else {
 			ServentInfo nextNode = getNextNodeForKey(key);
 			Message bm = new BuyMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key, amount, originalSenderId);
 			MessageUtil.sendMessage(bm);
+		}
+	}
+
+	/**
+	 * Runs the job right away if we hold the token, otherwise queues it and requests the token.
+	 * ChordState does not inspect or modify the inventory here, that is the job's responsibility.
+	 */
+	private void submitJob(Runnable job, int key) {
+		if (!hasToken) {
+			GrindingRoom.addToJobQueue(job);
+			AppConfig.timestampedStandardPrint("[MUTEX-REQUEST] item_id:" + key);
+			requestToken();
+		} else {
+			GrindingRoom.work(job);
 		}
 	}
 
@@ -509,7 +465,7 @@ public class ChordState {
 		Message mes = new NotifySubscribersMessage(AppConfig.myServentInfo.getListenerPort(),nextNode.getListenerPort(),subscriber,poruka);
 		MessageUtil.sendMessage(mes);
 	}
-	
+
 	/**
 	 * The chord get operation. Gets the value locally if key is ours, otherwise asks someone else to give us the value.
 	 * @return <ul>
@@ -526,11 +482,11 @@ public class ChordState {
 				return new Pair(-1,-1);
 			}
 		}
-		
+
 		ServentInfo nextNode = getNextNodeForKey(key);
 		AskGetMessage agm = new AskGetMessage(AppConfig.myServentInfo.getListenerPort(), nextNode.getListenerPort(), key + ":" + originalSenderId);
 		MessageUtil.sendMessage(agm);
-		
+
 		return new Pair(-2,-2);
 	}
 
@@ -673,10 +629,10 @@ public class ChordState {
 
 		for (int port : portsToNotify) {
 			if(type==MessageType.DEADNODE){
-			Message msg = new DeadNodeMessage(
-					AppConfig.myServentInfo.getListenerPort(),
-					port, deadNodeId, id);
-			MessageUtil.sendMessage(msg);
+				Message msg = new DeadNodeMessage(
+						AppConfig.myServentInfo.getListenerPort(),
+						port, deadNodeId, id);
+				MessageUtil.sendMessage(msg);
 			}else if(type==MessageType.TOKENREQUEST){
 				Message msg = new TokenRequestMessage(
 						AppConfig.myServentInfo.getListenerPort(),
